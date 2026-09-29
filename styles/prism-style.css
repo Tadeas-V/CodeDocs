@@ -1,0 +1,41 @@
+.plug {
+    font-weight: bold;
+    position: relative;
+    user-select: none;
+    left: 60px;
+}
+
+.plug:hover {
+    background-color: transparent;
+}
+
+.plug::after {
+    content: "Plugin: ";
+    color: #7fffd4; /* aquamarine */
+    position: absolute;
+    left: -60px;
+}
+
+.plug a {
+    text-decoration: none;
+    color: #38bdf8;
+}
+
+.plug a:hover {
+    text-decoration: underline solid;
+}
+
+.out {
+    color: #96e37f;
+    font-weight: bold;
+    position: relative;
+    user-select: none;
+    left: 20px;
+}
+
+.out::after {
+    content: "🧩";
+    color: #7fffd4; /* aquamarine */
+    position: absolute;
+    left: -25px;
+}

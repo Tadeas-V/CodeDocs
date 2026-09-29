@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDocs</title>
+  
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/prism.css">
+</head>
+<body>
+
+<!--===========================================
+=                 Boční panel                 =
+============================================-->
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>
+                <a href="./index.html">
+                    📖 CodeDocs
+                </a>
+            </h1>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="./pages/prism-help.html">
+                    🧩 PrismHelp
+                </a></li>
+                <li><a href="./pages/style-preview.html">
+                    🪷 StylePreview
+                </a></li>
+            </ul>
+            
+            <div class="menu-section">
+                <h3>Webové technologie</h3>
+                
+                <ul>
+                    <li><a href="./pages/html/index.html" class="nonactive">HTML</a></li>
+                    <li><a href="./pages/css/index.html" class="nonactive">CSS</a></li>
+                    <li><a href="./pages/js/index.html" class="nonactive">JavaScript (JS)</a></li>
+                    <li><a href="./pages/php/index.html" class="nonactive">PHP</a></li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <h3>Programovací jazyky</h3>
+                <ul>
+                    <li><a href="./pages/py/index.html" class="nonactive">Python</a></li>
+                    <li><a href="./pages/c/index.html" class="nonactive">C</a></li>
+                    <li><a href="./pages/cpp/index.html" class="nonactive">C++</a></li>
+                    <li><a href="./pages/cs/index.html" class="nonactive">C#</a></li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <h3>Skriptovací jazyky</h3>
+                <ul>
+                    <li><a href="./pages/sh/index.html">Bash</a></li>
+                    <li><a href="./pages/ps1/index.html" class="nonactive">PowerShell</a></li>
+                    <li><a href="./pages/bat/index.html" class="nonactive">Batch / CMD</a></li>
+                    <li><a href="./pages/ahk/index.html" class="nonactive">AutoHotkey</a></li>
+                </ul>
+            </div>
+                
+            <div class="menu-section">
+                <h3>Data & Databáze</h3>
+                <ul>
+                    <li><a href="./pages/json/index.html" class="nonactive">JSON</a></li>
+                    <li><a href="./pages/jsonl/index.html" class="nonactive">JSON Lines (JSONL)</a></li>
+                    <li><a href="./pages/xml/index.html" class="nonactive">XML</a></li>
+                    <li><a href="./pages/yaml/index.html" class="nonactive">YAML</a></li>
+                    <li><a href="./pages/sql/index.html" class="nonactive">SQL / MySQL</a></li>
+                </ul>
+            </div>
+            
+            <div class="menu-section">
+                <h3>Dokumentace</h3>
+                <ul>
+                    <li><a href="./pages/md/index.html" class="nonactive">Markdown (MD)</a></li>
+                    <li><a href="./pages/tex/index.html" class="nonactive">LaTeX</a></li>
+                    <li><a href="./pages/mmd/index.html" class="nonactive">Mermaid (Diagramy)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+    
+<!--============================================
+=               Hlavní struktura               =
+=============================================-->
+
+    <main class="content">
+        <h1>Vítejte v CodeDocs</h1>
+        <p>Můj osobní vývojářský deník, interaktivní zápisník a ucelená knihovna programátorských znalostí.</p>
+
+        <h2>O čem tento web je?</h2>
+        <p>Tento projekt slouží jako moje osobní vědomostní základna. Najdeš zde strukturované přehledy, praktické postřehy, tipy z praxe a ukázky kódu, které mi pomáhají při vývoji i při studiu.</p>
+
+        <h2>Jak se na webu orientovat?</h2>
+        <p>Téma a témata jsou řazena logicky – od úplných základů až po pokročilejší koncepty.</p>
+        <p>Boční panel slouží jako hlavní navigace. Nabídka v něm se přizpůsobuje sekci, ve které se právě nacházíš.</p>
+        <p>Web se volně inspiruje konceptem stránek <a href="https://www.w3schools.com/" target="_blank" rel="noopener">w3schools.com</a>, s cílem vytvořit přehlednou české alternativu přizpůsobenou mým potřebám.</p>
+
+        <h2>Ukázka kódových bloků</h2>
+        <p>
+            Pro čisté, přehledné a barevně zvýrazněné zobrazení ukázek kódů využívám knihovnu <a href="https://prismjs.com/" target="_blank" rel="noopener">Prism.js</a>. Díky jejím pluginům můžeš v ukázkách vidět číslování řádků, název jazyka nebo přímo kopírovat kód jedním kliknutím.
+        </p>
+
+        <p>
+            <b>Příklad: Jednoduché sčítání v Pythonu</b>
+        </p>
+
+        <pre class="line-numbers">
+            <code class="language-python">
+                a = 1
+                b = 5
+
+                print(a + b)
+            </code>
+        </pre>
+
+<!-------------------  Footer  -------------------->
+        <footer>
+            <p>Created by <i>Tadeáš Vosyka</i>.</p>
+            <p>&copy; 2026 — Všechna práva vyhrazena.</p>
+        </footer>
+    </main>
+
+    <script src="./utils/prism.js"></script>
+    <script src="./utils/typography.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nonactiveLinks = document.querySelectorAll('.sidebar a.nonactive');
+        
+            nonactiveLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

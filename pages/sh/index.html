@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDocs/SH</title>
+  
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/prism.css">
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
+</head>
+<body>
+
+<!--===========================================
+=                 Boční panel                 =
+============================================-->
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>
+                <a href="../../index.html">
+                    📖 CodeDocs
+                </a>
+            </h1>
+        </div>
+
+        <nav class="menu">
+            <div class="menu-section">
+                <h3>Terminálové příkazy</h3>
+                
+                <ul>
+                    <li><a href="#t-zaklady">Základy a pohyb</a></li>
+                    <li><a href="#t-soubory">Soubory a adresáře</a></li>
+                    <li><a href="#t-presmerovani">Přesměrování a roury</a></li>
+                    <li><a href="#t-prava">Práva</a></li>
+                    <li><a href="#t-odkazy">Odkazy a i-uzly</a></li>
+                    <li><a href="#t-ulohy">Procesy a úlohy</a></li>
+                    <li><a href="#t-bc">Kalkulačka bc</a></li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <h3>Souborové příkazy (skripty)</h3>
+                
+                <ul>
+                    <li><a href="#s-skript">Skript a spuštění</a></li>
+                    <li><a href="#s-promenne">Proměnné a vstup</a></li>
+                    <li><a href="#s-testy">Výrazy a testy</a></li>
+                    <li><a href="#s-if">Podmínky if a case</a></li>
+                    <li><a href="#s-cykly">Cykly</a></li>
+                    <li><a href="#s-priklady">Ukázkové skripty</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+    
+<!--============================================
+=               Hlavní struktura               =
+=============================================-->
+
+    <main class="content">
+        <h1>Bash</h1>
+        
+        <p>
+            Jakýkoliv Unixový terminál (<i>například v Ubuntu</i>) je vlastně „otevřený Bash“, takže příkazy jsou stejné. Liší se jen tím, kam je napíšeme:
+        </p>
+        
+        <ul>
+            <li><strong>Do terminálu:</strong> pak se jedná o terminálový příkaz.</li>
+            <li><strong>Do souboru:</strong> tak se jedné o souborový či scriptovací, tzv. Bash / Shell příkaz.</li>
+        </ul>
+        
+        <p>
+            Všechny příkazy zde byli úspěšně testovány na Ubuntu.
+            <br>
+            Většina příkazy se napříč Linux distry (<i>linux distribution</i>) řídí shodnými pravidli, jen některé jsou více upravené nebo přidávájí lepší, nebo vlastní příkazy.
+        </p>
+
+<!--============================================
+=              Terminálové příkazy             =
+=============================================-->
+
+        <h1 id="t-terminal">Terminálové příkazy</h1>
+
+<!-------------------  Základy  -------------------->
+
+        <h2 id="t-zaklady">Základy a pohyb</h2>
+
+        <h3 id="whoami">Kdo vlastně jsem? [<samp>whoami</samp> & <samp>who</samp>]</h3>
+
+        <p>
+            <code>whoami</code> & <code>who</code> – vznikli z doslovně anglické otázky <i>“Who am I?”</i> a <i>“Who?”</i> (<i><>„Kdo jsem?“ a „Kdo?“</i>). Tak trochu odkazují na uživatele. Příkaz <code class="ncode">whoami</code> říká přímo kdo je daný uživatel, kdežto <code class="ncode">who</code> říká, kdo všechno je přihlášený.
+        </p>
+        
+        <pre>
+            <code class="lang-bash">
+                whoami
+                \\codedocs
+                who
+                \\codedocs
+            </code>
+        </pre>
+        
+        
+        <p>
+            Parametr se píše pomocí <code>-</code> a lze je kombinovat: <code>ls -la</code>
+        </p>
+        <p>
+            <code>man příkaz</code> – <span class="gemini">zkratka ze slova <i>manual</i> (manuál). Vytáhne kompletní dokumentaci k jakémukoli příkazu</span> (ukončení klávesou <code>q</code> <span class="gemini">jako <i>quit</i></span>); <code>příkaz --help</code> – stručná nápověda; <code>help</code> – nápověda vestavěných příkazů samotného Bashe.
+        </p>
+        <p>
+            <code>history</code> – <span class="gemini">historie (seznam) dříve použitých příkazů</span>, <code>clear</code> – <span class="gemini">vyčistí (uklidí) obrazovku terminálu</span>, <kbd>Ctrl</kbd> + <kbd>C</kbd> – <span class="gemini">storno / okamžité přerušení a ukončení právě běžícího příkazu</span>.
+        </p>
+        <p>
+            <code>sudo příkaz</code> – <span class="gemini">pochází ze spojení <i>„SuperUser DO“</i> (superuživateli, udělej!). Provede danou akci s nejvyššími právy správce (<code>root</code>)</span>, poprvé se ptá na heslo.
+        </p>
+        <p>
+            <span class="claude"><code>pwd</code> – <span class="gemini">zkratka pro <i>„Print Working Directory“</i> (vypiš pracovní adresář) – jednoduše ti ukáže přesnou cestu, kde zrovna stojíš.</span></span>
+        </p>
+        
+        <p>Důležité cesty: <code>/</code> kořenový adresář (KřA), <code>~/</code> domovský adresář (DmA, tedy <code>/home/ubuntu2204</code>), <code>.</code> aktuální a <code>..</code> nadřazený adresář.</p>
+        
+        <pre
+            class="command-line"
+            data-language="Ubuntu"
+            data-prompt="codedocs@host:~$"
+        >
+            <code class="lang-bash">
+                cd /
+                cd ..
+                cd -
+                cd ~/
+                ls -la
+            </code>
+        </pre>
+        <ul>
+            <li><code>cd</code> / <code>cd ~/</code> – <span class="gemini"><code>cd</code> znamená <i>„Change Directory“</i> (změň adresář). Bez parametrů nebo s <code>~/</code> tě skokem vrátí do domovského adresáře</span>, <code>cd /</code> – do KřA, <code>cd -</code> – <span class="gemini">skok zpět do adresáře, ve kterém jsi byl přímo předtím (jako tlačítko zpět)</span>.</li>
+            <li><code>ls</code> – <span class="gemini">zkratka z <i>„list“</i> (seznam/výpis adresáře);</span> <code>-l</code> <span class="gemini">znamená <i>long</i> (dlouhý podrobný výpis s právy a datem)</span>, <code>-a</code> <span class="gemini">znamená <i>all</i> (ukáže i skryté soubory začínající tečkou)</span>, <code>-i</code> <span class="gemini">přidá čísla i-uzlů (<i>i-nodes</i>)</span>, <code>-R</code> <span class="gemini">znamená <i>recursive</i> (vypíše i obsah všech podadresářů)</span>.</li>
+        </ul>
+        <p>Jak číst výpis <code>ls -l</code>:</p>
+        <pre>
+            <code class="lang-txt">
+-rw-rw-r-- 1 ubuntu2204 ubuntu2204 54 zář  8 14:51 pepa
+│└┬┘└┬┘└┬┘ │ │          │          │  └─ datum a čas
+│ │  │  │  │ │          │          └──── velikost (B)
+│ │  │  │  │ └─────────────── skupina
+│ │  │  │  │ └────────────────────────── vlastník
+│ │  │  │  └──────────────────────────── počet tvrdých odkazů
+│ │  │  └─ práva ostatních (o)
+│ │  └──── práva skupiny (g)
+│ └─────── práva vlastníka (u)
+└───────── typ: - soubor, d adresář, l symlink, p roura
+            </code>
+        </pre>
+
+<!-------------------  Soubory  -------------------->
+        <h2 id="t-soubory">Soubory a adresáře</h2>
+        <ul>
+            <li><code>touch soubor</code> – <span class="gemini">původně slouží k „dotknutí se“ souboru (aktualizaci časového razítka). Pokud ale soubor neexistuje, vytvoří ho prázdný</span> (i více najednou); <code>-d "datum"</code> nastaví přesné datum, <code>-m</code> <span class="gemini">znamená <i>modification time</i> (přepíše aktuální čas změny souboru)</span> <span class="claude">(mění čas změny, nikoli „vytvoření“)</span>.</li>
+            <li><code>mkdir adr</code> – <span class="gemini">zkratka <i>„Make Directory“</i> (vytvoř adresář);</span> <span class="claude"><code>-p</code> <span class="gemini">znamená <i>parents</i> – vytvoří celou cestu včetně chybějících nadřazených složek najednou.</span></span></li>
+            <li><code>rm soubor</code> – <span class="gemini">zkratka z <i>„remove“</i> (odstranit) – smaže bez ptaní;</span> <code>rm -R adr</code> <span class="gemini">smaže rekurzivně i plný adresář;</span> <code>rmdir adr</code> <span class="gemini">znamená <i>„Remove Directory“</i> – smaže výhradně prázdný adresář.</span></li>
+            <li><code>cp a b</code> – <span class="gemini">zkratka z <i>„copy“</i> (kopírovat);</span> <code>cp a cesta/</code> kopie jinam; <code>cp -r adr cesta/</code> <span class="gemini">rekurzivně nakopíruje celý adresář.</span></li>
+            <li><code>mv a cesta/</code> – <span class="gemini">zkratka z <i>„move“</i> (přesunout);</span> <code>mv a novejmeno</code> – <span class="gemini">v Linuxu se přesun na stejné místo používá jako přejmenování.</span></li>
+            <li><code>cat</code> – <span class="gemini">zkratka z <i>„concatenate“</i> (spojit). Původně sloužil ke spojování souborů, ale nejčastěji se používá na rychlý výpis obsahu souboru do terminálu</span> (<code>-n</code> <span class="gemini"><i>number</i> – očísluje řádky</span>, <code>-b</code> jen neprázdné, <code>-s</code> sloučí prázdné, <code>-A</code> ukáže <code>$</code> na konci řádků), <code>tac</code> – <span class="gemini">přečtené jméno <code>cat</code> pozpátku – vypíše řádky v obráceném pořadí od konce.</span></li>
+            <li><code>head -n5 soubor</code> / <code>tail -n5 soubor</code> – <span class="gemini">zkratky pro „hlavu“ (začátek) a „ocas“ (konec). Vypíší prvních / posledních 5 řádků (výchozí je 10).</span></li>
+            <li><code>sort</code> – <span class="gemini">z anglického „seřadit“ – srovná řádky podle abecedy</span> (<code>-r</code> <span class="gemini"><i>reverse</i> – opačně</span>, <code>-n</code> <span class="gemini"><i>numeric</i> – podle čísel</span>, <code>-u</code> <span class="gemini"><i>unique</i> – ponechá jen unikátní řádky</span>, <code>-f</code> bez rozlišení velikosti).</li>
+            <li><code>wc -l soubor</code> – <span class="gemini"><code>wc</code> znamená <i>„Word Count“</i> (počet slov); přepínač <code>-l</code> (<i>lines</i>) spočítá čistě řádky;</span> samotné <code>wc</code> vypíše <span class="claude">řádky, slova a bajty</span>.</li>
+            <li><code>grep vzor soubor</code> – <span class="gemini">pochází z historického příkazu editoru ed: <i>Global / Regular Expression / Print</i>. Hledá v textu řádky odpovídající vzoru;</span> <code>-v</code> <span class="gemini">vyhledá opačně (řádky, kde vzor NENÍ)</span>, <code>-q</code> <span class="gemini"><i>quiet</i> – nic nevypíše, vrátí jen návratový kód.</span></li>
+            <li><code>soffice soubor</code> (LibreOffice), <code>open soubor</code>, <code>nano soubor</code> – otevření / úprava.</li>
+        </ul>
+        <p><b>Pozor:</b> <code>rm *</code> smaže vše v aktuálním adresáři, vždy kontroluj, kde stojíš.</p>
+
+<!-------------------  Přesměrování  -------------------->
+        <h2 id="t-presmerovani">Přesměrování a roury</h2>
+        <p>Každý proces má tři proudy: <code>0</code> standardní vstup <span class="gemini">(<i>stdin</i>)</span>, <code>1</code> standardní výstup <span class="gemini">(<i>stdout</i>)</span>, <code>2</code> chybový výstup <span class="gemini">(<i>stderr</i>)</span>. Symbol <code>&gt;</code> je zkratka pro <code>1&gt;</code>, <code>&lt;</code> pro <code>0&lt;</code>.</p>
+        <ul>
+            <li><code>příkaz &gt; soubor</code> – zapíše výstup; soubor vytvoří, existující <b>přepíše</b></li>
+            <li><code>příkaz &gt;&gt; soubor</code> – připojí na konec (neporuší obsah)</li>
+            <li><code>příkaz &lt; soubor</code> – vstup ze souboru (musí existovat)</li>
+            <li><code>příkaz 2&gt; /dev/null</code> – <span class="gemini">chybové hlášky pošle do „černé díry“ Linuxu (soubor <code>/dev/null</code>), tedy je zahodí</span></li>
+            <li><code>příkaz1 | příkaz2</code> – kolona (roura / <i>pipe</i>): výstup prvního je vstupem druhého</li>
+            <li><code>tee soubor</code> – <span class="gemini">pojmenováno podle T-spojky na potrubí. Výstup pošle dál na obrazovku a ZÁROVEŇ odbočkou uloží do souboru</span></li>
+        </ul>
+        <pre class="command-line" data-language="Ubuntu" data-prompt="codedocs@host:~$">
+            <code class="lang-bash">
+echo "Ahoj" > a.txt
+echo "Dál" >> a.txt
+cat /etc/passwd | grep -v systemd | grep -v /var | tee vystup
+ls | sort -r > reverzne
+            </code>
+        </pre>
+        <p><b>Pojmenovaná roura</b> je speciální soubor (typ <code>p</code>) pro jednosměrnou komunikaci dvou procesů: producent zapisuje, konzument čte a každý čeká na druhého. Vytvoří se <code>mknod roura p</code> <span class="gemini">(<i>make node</i>)</span> a po použití se smaže (čtení bez producenta čeká donekonečna).</p>
+        <pre class="command-line" data-language="Ubuntu" data-prompt="codedocs@host:~$">
+            <code class="lang-bash">
+mknod roura p
+head /etc/passwd > roura
+            </code>
+        </pre>
+        <p>Ve druhém terminálu: <code>cat roura</code> nebo <code>nl -v 15 roura | tee protokol</code>. <span class="claude">Stejný typ souboru vytvoří i <code>mkfifo roura</code> <span class="gemini">(<i>Make FIFO – First In, First Out</i>)</span>.</span></p>
+
+<!-------------------  Práva  -------------------->
+        <h2 id="t-prava">Práva</h2>
+        <p>Změna práv: <code>chmod [u|g|o|a][+|-|=][r|w|x] soubor</code> <span class="gemini">(<code>chmod</code> znamená <i>„Change Mode“</i> – změnit režim/práva souboru)</span>, např. <code>chmod o+rx soubor</code>. Volba <code>-R</code> platí i pro obsah adresáře.</p>
+        <ul>
+            <li><code>u</code> <span class="gemini"><i>user</i> (vlastník)</span>, <code>g</code> <span class="gemini"><i>group</i> (skupina)</span>, <code>o</code> <span class="gemini"><i>others</i> (ostatní)</span>, <code>a</code> <span class="gemini"><i>all</i> (všichni)</span></li>
+            <li><code>+</code> přidá, <code>-</code> odebere, <code>=</code> nastaví přesně</li>
+            <li><code>r</code> <span class="gemini"><i>read</i> – čtení (hodnota 4)</span>, <code>w</code> <span class="gemini"><i>write</i> – zápis (hodnota 2)</span>, <code>x</code> <span class="gemini"><i>execute</i> – spuštění / vstup do adresáře (hodnota 1)</span></li>
+        </ul>
+        <pre>
+            <code class="lang-txt">
+ u   g   o
+rwx rwx rwx
+421 421 421
+-7- -7- -7-      chmod 777 = všem vše, chmod 000 = nikomu nic
+
+546  →  4-1 4-- 42-  →  r-x r--  rw-
+            </code>
+        </pre>
+        <p>Před obvyklé tři číslice se přidává čtvrtá pro speciální bity: <code>4</code> SUID, <code>2</code> SGID, <code>1</code> sticky bit.</p>
+        <ul>
+            <li><b>SUID</b> – <span class="gemini"><i>Set User ID</i>. Spustitelný soubor běží s právy <i>vlastníka</i></span>, ne toho, kdo ho spustil (proto může běžný uživatel změnit heslo přes <code>passwd</code>). V <code>ls -l</code> je <code>s</code> místo <code>x</code> u vlastníka: <code>-rwsr-xr-x</code> (<code>chmod 4755</code>).</li>
+            <li><b>SGID</b> – <span class="gemini"><i>Set Group ID</i>. U souboru běží s právy <i>skupiny</i></span>; u adresáře dědí nové soubory skupinu adresáře (vhodné pro týmy). <code>s</code> u skupiny: <code>drwxrwsr-x</code> (<code>chmod 2775</code>).</li>
+            <li><b>Sticky bit</b> – <span class="gemini">„lepkaný bit“. U adresáře zabraňuje uživatelům mazat cizí soubory</span> (smí je smazat jen jejich vlastník, vlastník adresáře nebo root, např. složka <code>/tmp</code>). <code>t</code> u ostatních: <code>drwxrwxrwt</code> (<code>chmod 1777</code>).</li>
+        </ul>
+        <p><span class="claude">Velké <code>S</code> / <code>T</code> ve výpisu znamená, že bit je nastaven, ale příslušné <code>x</code> chybí.</span></p>
+
+<!-------------------  Odkazy  -------------------->
+        <h2 id="t-odkazy">Odkazy a i-uzly</h2>
+        <p>Soubor má dvě nezávislé části: <b>i-uzel</b> <span class="gemini">(<i>i-node</i> / <i>index node</i> – unikátní datová struktura uchovávající metadata jako velikost, vlastníka, práva či časy)</span> a <b>jméno</b> v adresáři, což je jen tabulka „jméno → číslo i-uzlu“.</p>
+        <ul>
+            <li><b>Tvrdý odkaz</b> (<code>ln soubor odkaz</code>, <span class="gemini">kde <code>ln</code> je zkratka pro <i>link</i></span>) je další jméno ukazující na stejný i-uzel. Počet je vidět v <code>ls -l</code>; data zmizí z disku, až počet odkazů klesne na 0. Nejde vytvářet na adresáře ani přes různé diskové oddíly.</li>
+            <li><b>Měkký odkaz</b> (<code>ln -s cíl odkaz</code>, <span class="gemini">kde <code>-s</code> znamená <i>symbolic</i> – symlink</span>) je malý samostatný soubor obsahující textovou cestu k cíli. Má vlastní i-uzel (<code>ls -li</code>), funguje i na adresáře a jiné disky, ale po smazání původního cíle přestane fungovat (vznkne tzv. mrtvý odkaz).</li>
+            <li>Adresář má vždy odkazy <code>.</code> (sám na sebe) a <code>..</code> (nadřazený). <span class="claude">Každý podadresář přidá další.</span></li>
+        </ul>
+        <pre class="command-line" data-language="Ubuntu" data-prompt="ubuntu2204@ubuntu-20:~/Plocha$" data-output="3-4">
+            <code class="lang-bash">
+ln -s soubor.txt zastupce
+ls -l
+lrwxrwxrwx 1 ubuntu2204 ubuntu2204 10 pro  2 10:02 zastupce -> soubor.txt
+            </code>
+        </pre>
+
+<!-------------------  Úlohy  -------------------->
+        <h2 id="t-ulohy">Procesy a úlohy</h2>
+        <ul>
+            <li><code>příkaz &amp;</code> – spustí na pozadí, prompt je hned volný; <code>Ctrl+Z</code> pozastaví úlohu v popředí</li>
+            <li><code>jobs</code> – <span class="gemini">vypíše seznam úloh běžících v aktuálním terminálu</span> (<code>-l</code> s PID, <code>-r</code> běžící, <code>-s</code> pozastavené)</li>
+            <li><code>fg</code> / <code>bg</code> – <span class="gemini">zkratky pro <i>foreground</i> (popředí) a <i>background</i> (pozadí) – přesunou úlohu podle potřeby</span></li>
+            <li><code>kill %2</code> – <span class="gemini">„zabije“ / ukončí úlohu číslo 2 (posílá výchozí ukončovací signál SIGTERM)</span></li>
+            <li><code>ping adresa</code> – <span class="gemini">odvozeno od ponorkového sonaru – posílá kontrolní pakety pro ověření dostupnosti sítě;</span> <code>sleep 600</code> – <span class="gemini">příkaz „uspí“ skript / terminál na 600 sekund (10 minut)</span></li>
+        </ul>
+        <pre class="command-line" data-language="Ubuntu" data-prompt="codedocs@host:~$" data-output="2-3,5">
+            <code class="lang-bash">
+ping www.seznam.cz
+^Z
+[1]+  Pozastavena             ping www.seznam.cz
+bg
+kill %1
+            </code>
+        </pre>
+        <p><span class="claude">Výstup procesu na pozadí se dál píše do terminálu (jako u <code>ping</code> výše); <code>Ctrl+C</code> ukončuje jen úlohu v popředí.</span></p>
+
+<!-------------------  bc  -------------------->
+        <h2 id="t-bc">Kalkulačka bc</h2>
+        <p><code>bc</code> <span class="gemini">(<i>Basic Calculator</i>)</span> počítá s libovolnou přesností. Přepínač <code>-l</code> zapne matematickou knihovnu <span class="gemini">(<i>math library</i>)</span>, <code>scale</code> určuje přesný počet desetinných míst, <code>ibase</code> / <code>obase</code> znamenají <i>input/output base</i> (vstupní / výstupní číselná soustava, výchozí je 10), ukončení provedete příkazem <code>quit</code>.</p>
+        <pre class="command-line" data-language="Ubuntu" data-prompt="codedocs@host:~$" data-output="2,4,6">
+            <code class="lang-bash">
+echo 'scale=5; sqrt(5)' | bc -l
+2.23606
+echo 'scale=120; 4*a(1)' | bc -l
+3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664
+echo '2*3^2' | bc
+18
+            </code>
+        </pre>
+        <p><code>a()</code> je arkus tangens <span class="gemini">(v radiánech, kde arctan(1) = π/4)</span>, proto <code>4*a(1)</code> dává π. Převod soustav: <code>obase=16</code>, pak <code>31</code> vypíše <code>1F</code>.</p>
+
+<!--============================================
+=               Souborové příkazy              =
+=============================================-->
+
+        <h1 id="s-souborove">Souborové příkazy (skripty)</h1>
+
+<!-------------------  Skript  -------------------->
+        <h2 id="s-skript">Skript a spuštění</h2>
+        <p>Posloupnost příkazů, kterou chceš používat opakovaně, uložíš do souboru a necháš ho provést interpretem. Cestu k němu udáváš v prvním řádku (<code>#!/bin/bash</code>) <span class="gemini">– této kombinaci znaků <code>#!</code> se v unixovém světě říká <i>shebang</i> (z kombinace <i>hash</i> <code>#</code> a <i>bang</i> <code>!</code>) a říká systému, jaký program má tento skript přečíst a vykonat.</span> Soubor bývá bez přípony nebo s <code>.sh</code>; kdo ho chce spouštět přímo, potřebuje spouštěcí právo <code>x</code>.</p>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+#!/bin/bash
+# komentář
+x=5
+echo "Hodnota proměnné x je $x."
+            </code>
+        </pre>
+        <ul>
+            <li><code>sh skript</code> / <code>bash skript</code> – spustí novým shellem</li>
+            <li><code>. skript</code> – provede ho aktuálním shellem <span class="gemini">(změny proměnných zůstanou v tvém terminálu)</span></li>
+            <li><span class="claude"><code>chmod +x skript</code> a pak <code>./skript</code> – spustí podle řádku <code>#!</code></span></li>
+        </ul>
+
+<!-------------------  Proměnné  -------------------->
+        <h2 id="s-promenne">Proměnné a vstup</h2>
+        <ul>
+            <li>Proměnné se nedeklarují, typ vznikne prvním použitím. Přiřazuješ bez <code>$</code> a <span class="claude">bez mezer kolem <code>=</code></span> (<code>x=5</code>), čteš s <code>$</code> (<code>$x</code>).</li>
+            <li><code>echo "text $x"</code> – výpis; <code>read x</code> – <span class="gemini">přečte a načte řádek z klávesnice od uživatele;</span> <code>read a b c</code> – rozdělí podle mezer do více proměnných</li>
+            <li><code>read -p "Zadej věk: " age</code> – s výzvou <span class="gemini">(<i>prompt</i>)</span>. <span class="claude">Volba <code>-p</code> funguje v Bashi, ale ne v <code>sh</code> (na Ubuntu je to <code>dash</code>).</span></li>
+            <li><code>"…"</code> – proměnné se dosadí; <code>'…'</code> – čistý text, nic se nedosazuje; <code>`příkaz`</code> – provede příkaz a dosadí jeho výstup <span class="claude">(dnes se píše <code>$(příkaz)</code>)</span></li>
+            <li><span class="claude"><code>echo -e "a\nb"</code> – pro <code>\n</code> ve výpisu; bez <code>-e</code> to Bash vypíše doslova.</span></li>
+        </ul>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+#!/bin/bash
+echo "SČÍTÁNÍ"
+read -p "Zadej x: " x
+read -p "Zadej y: " y
+z=$((x+y))
+echo "$x + $y =$z"
+            </code>
+        </pre>
+
+<!-------------------  Testy  -------------------->
+        <h2 id="s-testy">Výrazy a testy</h2>
+        <p>Počítání celých čísel: <code>$((a+b))</code>, <code>$((a\%b))</code> (zbytek), starší <code>expr $x + 1</code>. Desetinná čísla: <code>echo "scale=2; 10/3" | bc</code>.</p>
+        <p>Logické výrazy se píšou do <code>[ výraz ]</code> <span class="claude">(mezery uvnitř závorek jsou povinné)</span> <span class="gemini">– hranatá závorka <code>[</code> je v Bashi doslova zkratka pro příkaz <code>test</code></span>:</p>
+        <ul>
+            <li>Soubory: <code>-f</code> <span class="gemini">(<i>file</i> – je to běžný soubor)</span>, <code>-d</code> <span class="gemini">(<i>directory</i> – je to adresář)</span>, <code>-r</code> <code>-w</code> <code>-x</code> <span class="gemini">(lze číst / zapisovat / spustit)</span>, <code>-O</code> <span class="gemini">(<i>owner</i> – vlastníkem jsem já)</span>, <code>-N</code> <span class="gemini">(<i>newer</i> – změněn od posledního čtení)</span></li>
+            <li>Řetězce: <code>a = b</code>, <code>a != b</code>, <code>-z s</code> <span class="gemini">(<i>zero</i> – řetězec je prázdný)</span>, <code>-n s</code> <span class="gemini">(<i>non-zero</i> – řetězec není prázdný)</span> <span class="claude">(<code>&lt;</code> a <code>&gt;</code> je nutné psát <code>\&lt;</code> a <code>\&gt;</code>)</span></li>
+            <li>Čísla: <span class="gemini">používají zkratky z angličtiny:</span> <code>-eq</code> <span class="gemini">(<i>equal</i>)</span>, <code>-ne</code> <span class="gemini">(<i>not equal</i>)</span>, <code>-lt</code> <span class="gemini">(<i>less than</i>)</span>, <code>-le</code> <span class="gemini">(<i>less or equal</i>)</span>, <code>-gt</code> <span class="gemini">(<i>greater than</i>)</span>, <code>-ge</code> <span class="gemini">(<i>greater or equal</i>)</span></li>
+            <li>Spojování: <code>[ a ] &amp;&amp; [ b ]</code> (a zároveň), <code>||</code> (nebo)</li>
+        </ul>
+
+<!-------------------  if / case  -------------------->
+        <h2 id="s-if">Podmínky if a case</h2>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+if [ $age -lt 18 ]; then
+    echo "Nejsi plnoletý."
+elif [ $age -le 64 ]; then
+    echo "Jsi dospělý."
+else
+    echo "Jsi senior."
+fi
+            </code>
+        </pre>
+        <p><span class="claude"><code>else if</code> není <code>elif</code>: po <code>else if</code> je potřeba druhé <code>fi</code>, což je častá chyba.</span> <span class="gemini">Všimni si, že bloku <code>if</code> odpovídá ukončovací <code>fi</code> (slovo <i>if</i> pozpátku).</span> Podmínkou může být i příkaz: <code>if grep -q roman /etc/passwd; then …</code>.</p>
+        <p><code>case</code> je větvení podle hodnoty, jako <code>switch</code> jinde. <span class="gemini">Celá konstrukce končí slovem <code>esac</code> (opět slovo <i>case</i> zapsané pozpátku).</span> Platí první shoda, <code>;;</code> ukončuje větev, <code>*</code> je výchozí.</p>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+#!/bin/bash
+read -p "Znak: " znak
+case $znak in
+    [0-9]) echo "Číslo." ;;
+    [A-Z]) echo "Velké písmeno." ;;
+    [a-z]) echo "Malé písmeno." ;;
+    *)     echo "Jiný znak." ;;
+esac
+            </code>
+        </pre>
+
+<!-------------------  Cykly  -------------------->
+        <h2 id="s-cykly">Cykly</h2>
+        <ul>
+            <li><b>for</b> – předem známý seznam (položky oddělené mezerou); místo seznamu může být zástupný znak</li>
+            <li><b>while</b> – běží, dokud je podmínka splněná</li>
+            <li><b>until</b> – běží, dokud podmínka splněná <i>není</i></li>
+        </ul>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+for i in 1 3 5 7
+do
+    echo $i
+done
+
+for f in *
+do
+    if [ -f "$f" ]; then echo "$f je soubor"; fi
+done
+
+x=0
+while [ $x -le 10 ]
+do
+    echo "x je $x"
+    x=$((x+1))
+    sleep 1
+done
+
+until who | grep -q huzva
+do
+    sleep 20
+done
+echo "Už se přihlásil"
+            </code>
+        </pre>
+        <p><code>for</code>, <code>do</code> a <code>done</code> píš na samostatné řádky <span class="claude">(nebo je odděl středníkem: <code>for i in 1 2; do echo $i; done</code>)</span>.</p>
+
+<!-------------------  Příklady  -------------------->
+        <h2 id="s-priklady">Ukázkové skripty</h2>
+        <p><b>Dělitelnost:</b> číslo končí osmičkou a je dělitelné třemi.</p>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+#!/bin/bash
+read -p "Napiš číslo: " num
+if [ $((num \% 10)) -eq 8 ] && [$((num % 3)) -eq 0 ]; then
+    echo "Končí 8 a je dělitelné 3."
+else
+    echo "Nesplňuje."
+fi
+            </code>
+        </pre>
+        <p><b>Pythagorova věta</b> s <code>bc</code> a ošetřením záporných vstupů:</p>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+#!/bin/bash
+read -p "Odvěsna a: " a
+read -p "Odvěsna b: " b
+if [ $a -le 0 ] \vert{}\vert{} [$b -le 0 ]; then
+    echo "Zadej hodnoty větší než 0!"
+else
+    echo "c = $(echo "scale=2; sqrt($a^2 +$b^2)" | bc -l)"
+fi
+            </code>
+        </pre>
+        <p><b>Kalkulačka</b> pomocí <code>case</code> a <code>bc</code>:</p>
+        <pre class="line-numbers">
+            <code class="lang-bash">
+#!/bin/bash
+read -p "Zadej a operátor b (oddělené mezerou): " a op b
+case $op in
+    +|-|/) echo "scale=2; $a $op$b" | bc -l ;;
+    x|\*)  echo "scale=2; $a * $b" | bc -l ;;
+    *)     echo "Neznámá operace." ;;
+esac
+            </code>
+        </pre>
+        <p><span class="claude">Užitečné doplňky: <code>$1</code>, <code>$2</code> jsou argumenty skriptu, <code>$#</code> jejich počet, <code>$?</code> návratový kód posledního příkazu (0 = úspěch) a <code>exit 1</code> skript ukončí s chybou.</span></p>
+
+        <p>------------------------------------------------------------------------------------------------------------------</p>
+        
+        <h2 id="markdown-script">Můj zápis v Markdownu</h2>
+        
+        Soubor: "./Linux 9.md"
+        <zero-md src="./Linux 9.md"></zero-md>
+        Soubor: "./Linux-15.01.26-H16+ 16.md"
+        <zero-md src="./Linux-15.01.26-H16+ 16.md"></zero-md>
+        Soubor: "./OPS 2.md"
+        <zero-md src="./OPS 2.md"></zero-md>
+
+<!-------------------  Footer  -------------------->
+        <footer>
+            <p>Created by <i>Google Gemini (AI)</i> and <i>Tadeáš Vosyka</i>.</p>
+            <p>&copy; 2026 — Všechna práva vyhrazena.</p>
+        </footer>
+    </main>
+
+    <script src="../../utils/prism.js"></script>
+    <script src="../../utils/typography.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nonactiveLinks = document.querySelectorAll('.sidebar a.nonactive');
+        
+            nonactiveLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

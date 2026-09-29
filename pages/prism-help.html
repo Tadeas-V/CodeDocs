@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDocs/PrismHelp</title>
+
+    <link rel="stylesheet" href="../styles/prism.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/prism-style.css">
+</head>
+<body>
+
+<!--===========================================
+=                 Boční panel                 =
+============================================-->
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>
+                <a href="./prism-help.html">
+                    🧩 PrismHelp
+                </a>
+            </h1>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="../index.html">📖 CodeDocs</a></li>
+                <li><a href="#main-structure">Hlavní struktura</a></li>
+            </ul>
+
+            <div class="menu-section">
+                <h3>Prism Pluginy</h3>
+                <ul>
+                    <li><a href="#line-numbers">Line Numbers</a></li>
+                    <li><a href="#line-highlight">Line Highlight</a></li>
+                    <li><a href="#show-language">Show Language</a></li>
+                    <li><a href="#inline-color">Inline Color</a></li>
+                    <li><a href="#command-line">Command Line</a></li>
+                    <li><a href="#normalize-whitespace">Normalize Whitespace</a></li>
+                    <li><a href="#toolbar">Toolbar</a></li>
+                    <li><a href="#copy-to-clipboard">Copy to Clipboard Button</a></li>
+                    <li><a href="#match-braces">Match Braces</a></li>
+                    <li><a href="#treeview">Treeview</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+<!--============================================
+=               Hlavní struktura               =
+=============================================-->
+
+    <main class="content">
+        <h1>Soukromé poznámky pro práci s PrismJS</h1>
+        
+        <p>Tato stránka slouží jako přehledná nápověda a tahák pro použití jednotlivých pluginů knihovny PrismJS v projektu CodeDocs.</p>
+
+<!--============================================
+=                Main Structure                =
+=============================================-->
+
+        <h2 id="main-structure">Hlavní struktura</h2>
+
+        <p>PrismJS je speciální "kódování", která nám zajišťuje barevné parsování kódových blocků.</p>
+        <p>Píše se pomocí značky <code>&lt;pre&gt;</code> a v ní vnořené značky <code>&lt;code&gt;</code> se třídou určující jazyk v něm.</p>
+        <p>Vzhled je velmi jednoduchý:</p>
+
+        <pre>
+            <code class="lang-html">
+                &lt;pre&gt;
+                    &lt;code class="language-txt"&gt;
+                        Prostor pro kód
+                    &lt;/code&gt;
+                &lt;/pre&gt;
+
+                &lt;!-- nebo --&gt;
+
+                &lt;pre&gt;
+                    &lt;code class="lang-txt"&gt;
+                        Prostor pro kód
+                    &lt;/code&gt;
+                &lt;/pre&gt;
+            </code>
+        </pre>
+
+        <p>Pluginy se pak píší převážně jako třída či jiné atributy značky <code>&lt;pre&gt;</code>, ale mouhou se psát i do <code>&lt;body&gt;</code>, chceme-li, aby platila pro veškeré kódy. <i>(viz níže)</i></p>
+
+<!--============================================
+=                 Line Numbers                 =
+=============================================-->
+
+        <h2 id="line-numbers">Číslování řádků</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/line-numbers/" target="_blank">Line Numbers</a></span></p>
+
+        <p><b>Line Numbers</b> funguje velmi jednoduše. Stačí nám do třídy <code>&lt;pre&gt;</code> napsat <code>line-numbers</code> a získáme očíslování. Lze ho zapsat i do jiných značek jako je třeba <code>&lt;body&gt;</code>, což aplikuje tento plugin na veškeré vnořené kódy.</p>
+        <p>Pro jeho případné vypnutí pak funguje <code>no-line-numbers</code>. Slouží primárně pro druhé zmíněné použití.</p>
+
+        <span class="out">Ukázka:</span>
+        
+        <pre class="line-numbers">
+            <code class="lang-html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title>Document&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    |
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+
+        <p>Také můžeme využít atribut <code>data-start</code>, který nám řáká, od jakého řádku máme začít:</p>
+
+        <span class="out">Ukázka:</span>
+        
+        <pre
+            class="line-numbers"
+            data-start="5"
+        >
+            <code class="lang-html">
+                    &lt;title>Document&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    |
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+
+        <p>Což nám perfektně dokáže ukazovat vnitřky kódu bez starostí.</p>
+
+<!--============================================
+=                Line Highlight                =
+=============================================-->
+
+        <h2 id="line-highlight">Zvýraznění řádků</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/line-highlight/" target="_blank">Line Highlight</a></span></p>
+
+        <p>Pro <b>Line Highlight</b> potřebujeme speciální atribut <code>data-line</code>. Díky němu dokážeme zvíraznit potřebné řádky.</p>
+        <p><b>Line Highlight</b> má speciální vlastnost. Napíšeme-li ho jako jediný atribut značky <code>&lt;pre&gt;</code>, sám nám ukáže kolikátý řádek kódu je zvýrazněný:</p>
+        
+        <span class="out">Ukázka 1:</span>
+        
+        <pre data-line="1, 4-6">
+            <code class="lang-html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title>Document&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    |
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+
+        <p>Zde jsme použili <code>data-line="1, 4-6"</code>, což nám krásně ukazuje jak jednořádkové tak více řádkový zvýraznění. A nyní s <b>Line Numbers</b>:
+        </p>
+
+        <span class="out">Ukázka 2:</span>
+        
+        <pre
+            class="line-numbers"
+            data-line="1, 4-6"
+            data-line-offset="7"
+        >
+            <code class="lang-html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title>Document&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    |
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+
+<!--============================================
+=                Show Language                 =
+=============================================-->
+
+        <h2 id="show-language">Ukázání jazyka</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/show-language/" target="_blank">Show Language</a></span></p>
+
+        <p><b>Show Language</b> ukazuje jazyk podle toho, co napíšeme do <code>language-xxxx</code> (případně <code>lang-xxxx</code>).</p>
+
+        <p>Napíšeme-li <code>lang-py</code>, získáme Python. Stejně tak můžeme napsat i <code>python</code>.</p>
+
+        <span class="out">Ukázka:</span>
+
+        <pre>
+            <code class="lang-py">
+                text = "Tohle je Python."
+            </code>
+        </pre>
+
+        <p>Můžeme však využít i atribut <code>data-language</code>, kterým určíme, co přesně máme ukázat. Místo klasického <code>HTML</code> tak můžeme napsat klidně: <code>data-language="HyperText Markup Languages"</code>.</p>
+
+        <span class="out">Ukázka:</span>
+
+        <pre data-language="HyperText Markup Languages">
+            <code class="lang-py">
+                &lt;p&gt;Tohle je HTML.&lt;/p&gt;
+            </code>
+        </pre>
+
+        <p><b>Je nutné dodat, že aby nám toto fungovalo, potřebujeme také <a href="#toolbar">Toolbar</a>.</b></p>
+
+<!--============================================
+=                 Inline Color                 =
+=============================================-->
+
+        <h2 id="inline-color">❌ Náhled barevných kódů</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/inline-color/" target="_blank">Inline Color</a></span></p>
+
+        <p><b>Inline Color</b> by mělo zobrazovat malý čtvereček před barvou, ale z neznámích důvodů to zde nefunguje.</p>
+        
+        <pre>
+            <code class="lang-css">
+                .box {
+                    background-color: #ff5733;
+                    color: rgba(0, 0, 0, 0.8);
+                }
+            </code>
+        </pre>
+
+<!--============================================
+=                 Command Line                 =
+=============================================-->
+
+        <h2 id="command-line">Příkazová řádka</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/command-line/" target="_blank">Command Line</a></span></p>
+
+        <p><b>Command Line</b> složí primárně pro skriptování. Pro zobrazení potřebujeme značce <code>&lt;pre&gt;</code> dát třídu <code>command-line</code>. Tím nám PrismJS automaticky vygeneruje základní adresu <code>[user@localhost] $</code>.</p>
+
+        <span class="out">Ukázka:</span>
+        
+        <pre
+            data-language="Ubuntu"
+            class="command-line"
+        >
+            <code class="lang-sh">
+                whoami
+            </code>
+        </pre>
+
+        <p>Chceme-li však, tuto adresu upravit, musíme použít <code>data-user</code> a <code>data-host</code>:</p>
+        <p>Pro příklad použijeme <code>data-user="ubuntu"</code> a <code>data-host="host"</code>.</p>
+
+        <span class="out">Ukázka:</span>
+
+        <pre
+            data-language="Ubuntu"
+            class="command-line"
+            data-user="ubuntu"
+            data-host="host"
+        >
+            <code class="lang-sh">
+                whoami
+            </code>
+        </pre>
+
+        <p>Když už máme v ukázce příkaz <code>whoami</code>, chtělo by to nějaký ten výstup, že?</p>
+
+        <span class="out">Ukázka výstupu:</span>
+        
+        <pre
+            data-language="Ubuntu"
+            class="command-line"
+            data-user="ubuntu"
+            data-host="host"
+            data-output="2"
+        >
+            <code class="lang-sh">
+                    whoami
+                    [ubuntu@host]
+            </code>
+        </pre>
+
+        <p>Zde jsme použili atribut <code>data-output</code>, který řekne, které řádky jsou výstupem. Takže v <i>Ukázka výstupu</i> jsme použili <code>data-output="2"</code>.</p>
+
+        <br>
+        <p>Pro lepší prompt, třeba v Powershellu, se využívá atribut <code>data-prompt</code>.
+        </p>
+
+        <span class="out">Ukázka:</span>
+
+        <pre
+            data-language="PowerShell"
+            class="command-line"
+            data-prompt="PS C:\Users\CodeDocs>"
+            data-output="2"
+        >
+            <code class="lang-ps1">
+                whoami
+                CodeDocs\host
+            </code>
+        </pre>
+
+        <p>Dále tu máme také je <code>data-filter-output</code>, který složí pro jednoduší odfiltrování výstupu. A <code>data-continuation-str</code> sloužící jako pokračování příkazu třeba pro příkaz <code>echo</code>:</p>
+        
+        <span class="out">Ukázka:</span>
+        <pre
+            class="command-line"
+            data-filter-output="(out)"
+            data-continuation-str="\"
+        >
+            <code class="lang-bash">
+                export MY_VAR=123
+                echo "hello"
+                (out)hello
+                echo one \
+                two \
+                three
+                (out)one two three
+                (out) 
+                echo "goodbye"
+                goodbye
+            </code>
+        </pre>
+
+        <span class="out">Zápis ukázky:</span>
+
+        <pre
+            class="line-numbers"
+            data-start="-5"
+        >
+            <code class="lang-html">
+                &lt;pre
+                    class="command-line"
+                    data-filter-output="(out)"
+                    data-continuation-str="\"
+                &gt;
+                    &lt;code class="lang-bash"&gt;
+                        export MY_VAR=123
+                        echo "hello"
+                        (out)hello
+                        echo one \
+                        two \
+                        three
+                        (out)one two three
+                        (out) 
+                        echo "goodbye"
+                        goodbye
+                    &lt;/code&gt;
+                &lt;/pre&gt;
+            </code>
+        </pre>
+
+        <p>Dále tu máme třeba podobné <code>data-filter-continuation</code>, která naopak je podobná <code>data-continuation-str</code> a <code>data-continuation-prompt</code>, který určuje co přesně se ukáže na daném pokračovacím řádku:</p>
+        
+        <span class="out">Ukázka:</span>
+
+        <pre
+            class="command-line"
+            data-prompt="MySQL>"
+            data-continuation-prompt="->"
+            data-filter-output="(out)"
+            data-filter-continuation="(con)"
+        >
+            <code class="lang-sql">
+                set @my_var = 'foo';
+                set @my_other_var = 'bar';
+                (out)
+                CREATE TABLE people (
+                (con)first_name VARCHAR(30) NOT NULL,
+                (con)last_name VARCHAR(30) NOT NULL
+                (con));
+                (out)Query OK, 0 rows affected (0.09 sec)
+                (out)
+                insert into people
+                (con)values ('John', 'Doe');
+                (out)Query OK, 1 row affected (0.02 sec)
+                (out)
+                select *
+                (con)from people
+                (con)order by last_name;
+                (out)+------------+-----------+
+                (out)| first_name | last_name |
+                (out)+------------+-----------+
+                (out)| John       | Doe       |
+                (out)+------------+-----------+
+                (out)1 row in set (0.00 sec)
+            </code>
+        </pre>
+
+        <span class="out">Zápis ukázky:</span>
+
+        <pre
+            class="line-numbers"
+            data-start="-7"
+        >
+            <code class="lang-html">
+                &lt;pre
+                    class="command-line"
+                    data-prompt="MySQL>"
+                    data-continuation-prompt="->"
+                    data-filter-output="(out)"
+                    data-filter-continuation="(con)"
+                &gt;
+                    &lt;code class="lang-sql"&gt;
+                        set @my_var = 'foo';
+                        set @my_other_var = 'bar';
+                        (out)
+                        CREATE TABLE people (
+                        (con)first_name VARCHAR(30) NOT NULL,
+                        (con)last_name VARCHAR(30) NOT NULL
+                        (con));
+                        (out)Query OK, 0 rows affected (0.09 sec)
+                        (out)
+                        insert into people
+                        (con)values ('John', 'Doe');
+                        (out)Query OK, 1 row affected (0.02 sec)
+                        (out)
+                        select *
+                        (con)from people
+                        (con)order by last_name;
+                        (out)+------------+-----------+
+                        (out)| first_name | last_name |
+                        (out)+------------+-----------+
+                        (out)| John       | Doe       |
+                        (out)+------------+-----------+
+                        (out)1 row in set (0.00 sec)
+                    &lt;/code&gt;
+                &lt;/pre&gt;
+            </code>
+        </pre>
+
+        <p><code>data-continuation-prompt</code> má v <b>default</b> nastavení právě <code>&gt;</code>.</p>
+
+<!--============================================
+=             Normalize Whitespace             =
+=============================================-->
+
+        <h2 id="normalize-whitespace">Normalize Whitespace</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/normalize-whitespace/" target="_blank">Normalize Whitespace</a></span></p>
+
+        <p>Automaticky odstraňuje zbytečné odsazení a prázdné řádky na začátku a konci kódového bloku u značek <code>&lt;pre&gt;</code>, takže kód vypadá vždy čistě bez ohledu na formátování HTML.</p>
+
+        <span class="out">Ukázka:</span>
+
+        <pre class="no-whitespace-normalization">
+            <code class="lang-javascript">
+                // Tento plugin funguje automaticky na pozadí pro všechny bloky.
+                // Lze ho případně konfiguruje v JS skriptu:
+                Prism.plugins.NormalizeWhitespace.setDefaults({
+                    'remove-trailing': true,
+                    'remove-indent': true,
+                    'left-trim': true,
+                    'right-trim': true
+                });
+            </code>
+        </pre>
+
+        <span class="out">Zápis ukázky:</span>
+
+        <pre>
+            <code class="lang-html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="cs"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title&gt;Zápis ukázky&lt;/title&gt;
+                    &lt;link rel="stylesheet" href="./styles/prism.css"&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;main&gt;
+                        &lt;pre class="no-whitespace-normalization"&gt;
+                            &lt;code class="lang-javascript"&gt;
+                                // Tento plugin funguje automaticky na pozadí pro všechny bloky.
+                                // Lze ho případně konfiguruje v JS skriptu:
+                                Prism.plugins.NormalizeWhitespace.setDefaults({
+                                    'remove-trailing': true,
+                                    'remove-indent': true,
+                                    'left-trim': true,
+                                    'right-trim': true
+                                });
+                            &lt;/code&gt;
+                        &lt;/pre&gt;
+                    &lt;script src="./utils/prism.js"&gt;&lt;/script&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+
+<!--============================================
+=                   Toolbar                    =
+=============================================-->
+
+        <h2 id="toolbar">Nástrojová lišta (Toolbar)</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/toolbar/" target="_blank">Toolbar</a></span></p>
+
+        <p>Základní panel nad kódovým blokem, který slouží jako kontejner pro tlačítka a informace. Máme zde <a href="#show-language">Název jazyka</a> a <a href="#copy-to-clipboard">Tlačítko pro kopírování</a>.</p>
+
+<!--============================================
+=              Copy to Clipboard               =
+=============================================-->
+
+        <h2 id="copy-to-clipboard">Tlačítko Kopírovat</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/copy-to-clipboard/" target="_blank">Copy to Clipboard Button</a></span></p>
+
+        <p>Přidá do horní lišty kódu tlačítko, které uživateli umožní jedním kliknutím zkopírovat celý kód do schránky.</p>
+        <p><b>Je nutné dodat, že aby nám toto fungovalo, potřebujeme také <a href="#toolbar">Toolbar</a>.</b></p>
+
+        <p><code>data-prismjs-copy</code> je default zpráva, která se zobrazí před kliknutím.</p>
+        <p><code>data-prismjs-copy-error</code> je zpráva zobrazená po špatném zkopírovaní.</p>
+        <p><code>data-prismjs-copy-success</code> je zpráva zobrazující se po úspěšném zkopírovaní.</p>
+        <p><code>data-prismjs-copy-timeout</code> je časovač (v milisekundách) po zkopírování. Určuje, jak dlouho se zobrazí zpráva po kliknutí na tlačítko.</p>
+
+        <span class="out">Ukázka:</span>
+
+        <pre data-prismjs-copy="Zkopírovat schránky">
+            <code class="lang-text">
+                Tohle je ukázka Kopírovacího tlačítka.
+            </code>
+        </pre>
+
+        <p>V tomto dokumentu se tlačítko zobrazuje neustále, ale v originálu se zobrazí až po najetí na blok kódu.</p>
+
+<!--============================================
+=                 Match Braces                 =
+=============================================-->
+
+        <h2 id="match-braces">Zvýraznění shodných závorek</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/match-braces/" target="_blank">Match Braces</a></span></p>
+
+        <p><b>Match Braces</b> vytváří jednoduché a přehledné zvýrazňování závorek, zapomoci najetí nebo kliknutí na závorky.</p>
+        <p>K jeho zapnutí složí <code>match-braces</code>, který kolem závorek vytvoří obdelníček.</p>
+        <p>Chceme-li, aby byli vidět ihned bez najíždění či klikání stačí použít <code>rainbow-braces</code>, která je zbarví do barevna, ale nepodporuje obdelníčkové zobrazení.</p>
+        <p>Lze také použít <code>no-brace-hover</code>, aby se nezvýrazňovali při najetí, nebo <code>no-brace-select</code>, aby se nedokázali vybrat.</p>
+        <p>Tyto třídy lze kombinovat a vytvořit tak barevné zobrazovací závorky.</p>
+
+        <span class="out">Ukázka 1 (match-braces):</span>
+
+        <pre class="match-braces">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 2 (match-braces | no-brace-hover):</span>
+
+        <pre class="match-braces no-brace-hover">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 3 (match-braces | no-brace-select):</span>
+
+        <pre class="match-braces no-brace-select">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 4 (match-braces | no-brace-hover | no-brace-select):</span>
+
+        <pre class="match-braces no-brace-hover no-brace-select">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 5 (match-braces | rainbow-braces):</span>
+
+        <pre class="match-braces rainbow-braces">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 6 (match-braces | rainbow-braces | no-brace-hover):</span>
+
+        <pre class="match-braces rainbow-braces no-brace-hover">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 7 (match-braces | rainbow-braces | no-brace-select):</span>
+
+        <pre class="match-braces rainbow-braces no-brace-select">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 8 (match-braces | rainbow-braces | no-brace-hover | no-brace-select):</span>
+
+        <pre class="match-braces rainbow-braces no-brace-hover no-brace-select">
+            <code class="lang-py">
+                function test() {
+                    if (true) {
+                        console.log([1, 2, 3]);
+                    }
+                }
+            </code>
+        </pre>
+
+<!--============================================
+=                   Treeview                   =
+=============================================-->
+
+        <h2 id="treeview">Strukturované zobrazení složek (Treeview)</h2>
+        <p><span class="plug"><a href="https://prismjs.com/plugins/treeview/" target="_blank">Treeview</a></span></p>
+
+        <p>Pro vykreslení souborové architektury potřebujeme mít na značce <code>&lt;code&gt;</code> třídu <code>language-treeview</code> (<code>lang-treeview</code>).</p>
+
+        <span class="out">Ukázka 1:</span>
+
+        <pre>
+            <code class="lang-treeview">
+                root_folder/
+                |-- a first folder/
+                |   |-- holidays.mov
+                |   |-- javascript-file.js
+                |   `-- some_picture.jpg
+                |-- documents/
+                |   |-- spreadsheet.xls
+                |   |-- manual.pdf
+                |   |-- document.docx
+                |   `-- presentation.ppt
+                |-- empty_folder/
+                |-- going deeper/
+                |   |-- going deeper/
+                |   |   `-- going deeper/
+                |   |        `-- going deeper/
+                |   |            `-- .secret_file
+                |   |-- style.css
+                |   `-- index.html
+                |-- music and movies/
+                |   |-- great-song.mp3
+                |   |-- S01E02.new.episode.avi
+                |   |-- S01E02.new.episode.nfo
+                |   `-- track 1.cda
+                |-- .gitignore
+                |-- .htaccess
+                |-- .npmignore
+                |-- archive 1.zip
+                |-- archive 2.tar.gz
+                |-- logo.svg
+                `-- README.md
+            </code>
+        </pre>
+
+        <span class="out">Ukázka 2:</span>
+
+        <pre>
+            <code class="lang-treeview">
+                root_folder/
+                ├── a first folder/
+                │   ├── holidays.mov
+                │   ├── javascript-file.js
+                │   └── some_picture.jpg
+                ├── documents/
+                │   ├── spreadsheet.xls
+                │   ├── manual.pdf
+                │   ├── document.docx
+                │   └── presentation.ppt
+                ├── empty_folder/
+                ├── going deeper/
+                │   ├── going deeper/
+                │   │   └── going deeper/
+                │   │        └── going deeper/
+                │   │            └── .secret_file
+                │   ├── style.css
+                │   └── index.html
+                ├── music and movies/
+                │   ├── great-song.mp3
+                │   ├── S01E02.new.episode.avi
+                │   ├── S01E02.new.episode.nfo
+                │   └── track 1.cda
+                ├── .gitignore
+                ├── .htaccess
+                ├── .npmignore
+                ├── archive 1.zip
+                ├── archive 2.tar.gz
+                ├── logo.svg
+                └── README.md
+            </code>
+        </pre>
+
+        <p>Máme dva způsoby na zápis:</p>
+
+        <pre data-language="Treeview preview">
+            <code class="lang-txt">
+                root_folder/
+                |-- a first folder/
+                |   |-- javascript-file.js
+                |   `-- some_picture.jpg
+                |-- going deeper/
+                |   `-- going deeper/
+                |        `-- going deeper/
+                |            `-- .secret_file
+                `-- README.md
+
+                NEBO
+
+                root_folder/
+                ├── a first folder/
+                │   ├── javascript-file.js
+                │   └── some_picture.jpg
+                ├── going deeper/
+                │   └── going deeper/
+                │        └── going deeper/
+                │            └── .secret_file
+                └── README.md
+            </code>
+        </pre>
+
+        <p>V první variantě vidíme využití <code>|</code>, <code>-</code> a <code>`</code>, kdežto v druhé vidíme využití tzv. box drawing symbolů <code>│</code>, <code>├</code>, <code>└</code> a <code>─</code>.
+        </p>
+
+<!-------------------  Footer  -------------------->
+        <footer>
+                <p>Created by <i>Google Gemini (AI)</i> and <i>Tadeáš Vosyka</i>.</p>
+            <p>&copy; 2026 — Všechna práva vyhrazena.</p>
+        </footer>
+    </main>
+
+    <script src="../utils/prism.js"></script>
+    <script src="../utils/typography.js"></script>
+</body>
+</html>

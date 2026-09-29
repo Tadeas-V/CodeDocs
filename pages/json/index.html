@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDocs/JSON</title>
+  
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/prism.css">
+</head>
+<body>
+
+<!--===========================================
+=                 Boční panel                 =
+============================================-->
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>
+                <a href="../../index.html">
+                    📖 CodeDocs
+                </a>
+            </h1>
+        </div>
+
+        <nav class="menu">
+            <div class="menu-section">
+                <h3>PlaceHolder</h3>
+                
+                <ul>
+                    <li><a href="./sublink" class="nonactive">SubLink</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+    
+<!--============================================
+=               Hlavní struktura               =
+=============================================-->
+
+    <main class="content">
+        <h1>Header 1</h1>
+        
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere esse cupiditate, corrupti veniam, quam possimus soluta officiis asperiores harum deleniti similique aspernatur officia ex. Sint, assumenda laudantium! Molestiae, assumenda.</p>
+        
+<!-------------------  Footer  -------------------->
+        <footer>
+            <p>Created by <i>Tadeáš Vosyka</i>.</p>
+            <p>&copy; 2026 — Všechna práva vyhrazena.</p>
+        </footer>
+    </main>
+
+    <script src="../../utils/prism.js"></script>
+    <script src="../../utils/typography.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nonactiveLinks = document.querySelectorAll('.sidebar a.nonactive');
+        
+            nonactiveLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../../styles/prism.css">
+    <link rel="stylesheet" href="../../styles/math-style.css">
+
+    <title>MathHelp</title>
+
+    <!-- Načtení stylů a skriptu KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+
+<!--===========================================
+=                 Boční panel                 =
+============================================-->
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h1><a href="./index.html">
+                    📐 MathHelp
+            </a></h1>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="../../index.html">
+                    📖 CodeDocs [Home]
+                </a></li>
+                <li><a href="./js-math-markdown.html">
+                    🔢 JS Math Markdown Editor
+                </a></li>
+                <li><a href="./index.html">
+                    📝 MathDocs
+                </a></li>
+                <li><a href="./math-help.html" class="active">
+                    📐 MathHelp
+                </a></li>
+            </ul>
+        </nav>
+    </aside>
+    
+<!--============================================
+=            Hlavní struktura                  =
+=============================================-->
+
+    <main class="content">
+        <h1>📐 MathHelp</h1>
+
+<!-------------------  Footer  -------------------->
+        <footer>
+            <p>Created by <span class="gemini">Google Gemini (AI)</span> and <i>Tadeáš Vosyka</i>.</p>
+            <p>&copy; 2026 — Všechna práva vyhrazena.</p>
+        </footer>
+    </main>
+
+    <script src="../../utils/prism.js"></script>
+    <script src="../../utils/typography.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nonactiveLinks = document.querySelectorAll('.sidebar a.nonactive');
+        
+            nonactiveLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

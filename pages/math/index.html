@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../../styles/math-style.css">
+
+    <title>MathDocs</title>
+
+    <!-- Načtení stylů a skriptu KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+
+<!--===========================================
+=                 Boční panel                 =
+============================================-->
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h1><a href="./index.html">
+                    📝 MathDocs
+            </a></h1>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="../../index.html">
+                    📖 CodeDocs [Home]
+                </a></li>
+                <li><a href="./js-math-markdown.html">
+                    🔢 JS Math Markdown Editor
+                </a></li>
+                <li><a href="./math-help.html">
+                    📐 MathHelp
+                </a></li>
+            </ul>
+        </nav>
+    </aside>
+    
+<!--============================================
+=            Hlavní struktura                  =
+=============================================-->
+
+    <main class="content">
+        <h1>Kompletní přehled matematiky (ZŠ & SŠ)</h1>
+        <p>Vítejte v dokumentaci MathDocs. Níže naleznete ucelený přehled klíčových vzorců, vět a pravidel od základní školy až po středoškolskou matematiku k maturitě.</p>
+
+        <!-- SEC: ZÁKLADNÍ ŠKOLA -->
+        <section>
+            <h2>1. Základní škola (ZŠ)</h2>
+
+            <h3>1.1 Zlomky a mocniny</h3>
+            <p>Sčítání a násobení zlomků:</p>
+            $$\frac{a}{b} \pm \frac{c}{d} = \frac{ad \pm bc}{bd}, \quad \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}$$
+            <p>Pravidla pro mocniny a odmocniny (kde $a > 0$):</p>
+            $$a^m \cdot a^n = a^{m+n}, \quad \frac{a^m}{a^n} = a^{m-n}, \quad (a^m)^n = a^{m \cdot n}$$
+            $$\sqrt{a \cdot b} = \sqrt{a} \cdot \sqrt{b}, \quad \sqrt{\frac{a}{b}} = \frac{\sqrt{a}}{\sqrt{b}}$$
+
+            <h3>1.2 Úpravy výrazů (Vzorce)</h3>
+            $$\begin{aligned}
+            (a + b)^2 &= a^2 + 2ab + b^2 \\
+            (a - b)^2 &= a^2 - 2ab + b^2 \\
+            a^2 - b^2 &= (a - b)(a + b)
+            \end{aligned}$$
+
+            <h3>1.3 Obvody a obsahy rovinných útvarů</h3>
+            <p><b>Čtverec a obdélník:</b> $S = a^2$, $S = a \cdot b$</p>
+            <p><b>Trojúhelník:</b> $S = \frac{a \cdot v_a}{2}$ nebo pomocí Heronova vzorce: $S = \sqrt{s(s-a)(s-b)(s-c)}$, kde $s = \frac{a+b+c}{2}$</p>
+            <p><b>Kruh a kružnice:</b> Obvod $o = 2\pi r$, obsah $S = \pi r^2$</p>
+
+            <h3>1.4 Pythagorova věta a goniometrie pravouhlého trojúhelníku</h3>
+            <p>Pro pravouhlý trojúhelník s odvěsnami $a, b$ a přepponou $c$ platí:</p>
+            $$a^2 + b^2 = c^2$$
+            <p>Goniometrické funkce:</p>
+            $$\sin\alpha = \frac{\text{protilehlá}}{\text{přepona}}, \quad \cos\alpha = \frac{\text{přilehlá}}{\text{přepona}}, \quad \tan\alpha = \frac{\text{protilehlá}}{\text{přilehlá}}$$
+        </section>
+
+        <!-- SEC: STŘEDNÍ ŠKOLA -->
+        <section>
+            <h2>2. Střední škola (SŠ)</h2>
+
+            <h3>2.1 Kvadratická rovnice a Viètovy vzorce</h3>
+            <p>Obecný tvar kvadratické rovnice: $ax^2 + bx + c = 0$ ($a \neq 0$)</p>
+            <p>Diskriminant $D = b^2 - 4ac$. Kořeny určíme podle vzorce:</p>
+            $$x_{1,2} = \frac{-b \pm \sqrt{D}}{2a}$$
+            <p>Pro $D > 0$ má rovnice 2 reálné kořeny, pro $D = 0$ jeden dvojnásobný kořen $x = \frac{-b}{2a}$, pro $D < 0$ dva komplexně sdružené kořeny.</p>
+            <p>Viètovy vzorce pro normovanou rovnici ($x^2 + px + q = 0$):</p>
+            $$x_1 + x_2 = -p, \quad x_1 \cdot x_2 = q$$
+
+            <h3>2.2 Exponenciální a logaritmické funkce</h3>
+            <p>Definice logaritmu: $\log_a x = y \iff a^y = x$ pro $a > 0, a \neq 1, x > 0$.</p>
+            <p>Vlastnosti logaritmů:</p>
+            $$\log_a(x \cdot y) = \log_a x + \log_a y, \quad \log_a\left(\frac{x}{y}\right) = \log_a x - \log_a y$$
+            $$\log_a(x^k) = k \cdot \log_a x, \quad \log_b x = \frac{\log_a x}{\log_a b}$$
+
+            <h3>2.3 Goniometrie a trigonometrie</h3>
+            <p>Základní vztahy:</p>
+            $$\sin^2\alpha + \cos^2\alpha = 1, \quad \tan\alpha = \frac{\sin\alpha}{\cos\alpha}$$
+            <p>Součtové vzorce a dvojnásobný úhel:</p>
+            $$\sin(2\alpha) = 2\sin\alpha\cos\alpha, \quad \cos(2\alpha) = \cos^2\alpha - \sin^2\alpha$$
+            <p>Sinová a kosinová věta (obecný trojúhelník):</p>
+            $$\frac{a}{\sin\alpha} = \frac{b}{\sin\beta} = \frac{c}{\sin\gamma} = 2R$$
+            $$c^2 = a^2 + b^2 - 2ab\cos\gamma$$
+
+            <h3>2.4 Posloupnosti a řady</h3>
+            <p><b>Aritmetická posloupnost:</b> $a_n = a_1 + (n-1)d$, součet prvních $n$ členů $s_n = \frac{n}{2}(a_1 + a_n)$</p>
+            <p><b>Geometrická posloupnost:</b> $a_n = a_1 \cdot q^{n-1}$, součet $s_n = a_1 \frac{q^n - 1}{q - 1}$ ($q \neq 1$)</p>
+            <p>Součet nekonečné geometrické řady (pro $|q| < 1$): $s = \frac{a_1}{1 - q}$</p>
+
+            <h3>2.5 Analytická geometrie</h3>
+            <p>Vektorový součin a vzdálenost bodů $A[x_1, y_1], B[x_2, y_2]$:</p>
+            $$|AB| = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+            <p>Obecná rovnice přímky v rovině: $ax + by + c = 0$, kde $\vec{n} = (a, b)$ je normálový vektor.</p>
+            <p>Středová rovnice kružnice se středem $S[m, n]$ a poloměrem $r$:</p>
+            $$(x - m)^2 + (y - n)^2 = r^2$$
+
+            <h3>2.6 Kombinatorika a pravděpodobnost</h3>
+            <p>Permutace bez opakování: $P(n) = n!$</p>
+            <p>Variace bez opakování: $V(k, n) = \frac{n!}{(n-k)!}$</p>
+            <p>Kombinace bez opakování (kombinační číslo):</p>
+            $$C(k, n) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$$
+            <p>Pravděpodobnost jevu $A$: $P(A) = \frac{m}{n}$ (počet příznivých / počet všech možných výsledků).</p>
+
+            <h3>2.7 Základy diferenciálního a integrálního počtu (Bonus / Maturita)</h3>
+            <p>Derivace základních funkcí:</p>
+            $$(x^n)' = n \cdot x^{n-1}, \quad (\sin x)' = \cos x, \quad (\cos x)' = -\sin x, \quad (e^x)' = e^x$$
+            <p>Neurčitý integrál:</p>
+            $$\int x^n \, dx = \frac{x^{n+1}}{n+1} + C \quad (n \neq -1)$$
+        </section>
+
+<!-------------------  Footer  -------------------->
+        <footer>
+            <p>Created by <i>Google Gemini (AI)</i> and <i>Tadeáš Vosyka</i>.</p>
+            <p>&copy; 2026 — Všechna práva vyhrazena.</p>
+        </footer>
+    </main>
+
+    <script src="../../utils/typography.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nonactiveLinks = document.querySelectorAll('.sidebar a.nonactive');
+        
+            nonactiveLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

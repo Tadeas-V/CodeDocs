@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="cs" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Math & Markdown Notebook</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- KaTeX for LaTeX rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Marked for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        .katex-display {
+            margin: 0.5em 0 !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 2px 0;
+        }
+        .eval-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(14, 165, 233, 0.15);
+            color: #0284c7;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            border-radius: 0.375rem;
+            padding: 0.125rem 0.4rem;
+            margin: 0 0.2rem;
+            font-weight: 600;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .dark .eval-badge {
+            background-color: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .eval-error {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 0.375rem;
+            padding: 0.125rem 0.4rem;
+            margin: 0 0.2rem;
+            font-weight: 600;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+        .dark .eval-error {
+            background-color: rgba(248, 113, 113, 0.2);
+            color: #f87171;
+            border-color: rgba(248, 113, 113, 0.4);
+        }
+        
+        /* JS Output Card */
+        .js-code-block {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+            font-family: monospace;
+            font-size: 0.875rem;
+            border-left: 4px solid #38bdf8;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .js-code-output {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #334155;
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        /* Markdown Preview Styling */
+        .preview-content h1 { font-size: 1.875rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(156, 163, 175, 0.3); padding-bottom: 0.25rem; }
+        .preview-content h2 { font-size: 1.5rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .preview-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.5rem; }
+        .preview-content p { margin-bottom: 0.75rem; line-height: 1.625; }
+        .preview-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+        .preview-content ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+        .preview-content code:not(.katex code) { background-color: rgba(156, 163, 175, 0.2); padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.875em; }
+        .preview-content blockquote { border-left: 4px solid #0284c7; padding-left: 1rem; color: #64748b; font-style: italic; margin-bottom: 0.75rem; }
+        .dark .preview-content blockquote { color: #94a3b8; }
+        .preview-content table { width: 100%; border-collapse: collapse; margin-bottom: 0.75rem; }
+        .preview-content th, .preview-content td { border: 1px solid rgba(156, 163, 175, 0.3); padding: 0.5rem; text-align: left; }
+        .preview-content th { background-color: rgba(156, 163, 175, 0.1); }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 h-full flex flex-col font-sans transition-colors duration-200">
+
+    <!-- Header Navbar -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex flex-wrap items-center justify-between gap-2 shadow-sm z-10">
+        <div class="flex items-center space-x-3">
+            <div class="bg-brand-500 text-white p-2.5 rounded-xl shadow-md flex items-center justify-center">
+                <i class="fa-brands fa-js text-xl mr-1"></i>
+                <i class="fa-solid fa-square-root-variable text-lg"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight text-gray-900 dark:text-white">JS Math Markdown Notebook</h1>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Interaktivní matematický zápis s reálným JS runtime v prohlížeči</p>
+            </div>
+        </div>
+
+        <div class="flex items-center flex-wrap gap-2">
+            <!-- Reset Environment -->
+            <button id="resetEnvBtn" title="Vynulovat proměnné a prostředí" class="px-3 py-1.5 text-xs font-medium bg-red-50 hover:bg-red-100 dark:bg-red-900/30 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-1.5 transition">
+                <i class="fa-solid fa-rotate-right"></i> <span class="hidden sm:inline">Resetovat stav</span>
+            </button>
+
+            <!-- Copy & Download Actions -->
+            <button id="copyMdBtn" title="Kopírovat Markdown" class="px-3 py-1.5 text-xs font-medium bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg flex items-center gap-1.5 transition">
+                <i class="fa-regular fa-copy"></i> <span class="hidden sm:inline">Kopírovat</span>
+            </button>
+            <button id="downloadMdBtn" title="Stáhnout jako .md" class="px-3 py-1.5 text-xs font-medium bg-brand-500 hover:bg-brand-600 text-white rounded-lg flex items-center gap-1.5 transition shadow-sm">
+                <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Stáhnout .md</span>
+            </button>
+            
+            <div class="h-4 w-px bg-gray-300 dark:bg-gray-600 mx-1"></div>
+
+            <!-- Dark mode toggle -->
+            <button id="themeToggleBtn" title="Přepnout téma" class="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                <i class="fa-solid fa-moon dark:hidden"></i>
+                <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Examples & Quick Snippets Toolbar -->
+    <div class="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700 px-4 py-2 flex items-center gap-2 overflow-x-auto text-xs scrollbar-thin">
+        <span class="text-gray-400 font-semibold uppercase text-[10px] tracking-wider mr-1 select-none flex items-center gap-1">
+            <i class="fa-solid fa-book-bookmark"></i> Ukázky:
+        </span>
+        
+        <button class="load-demo-btn px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md hover:bg-brand-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 transition font-medium flex items-center gap-1" data-demo="pythagoras">
+            📐 Pythagorova věta
+        </button>
+        <button class="load-demo-btn px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md hover:bg-brand-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 transition font-medium flex items-center gap-1" data-demo="circle">
+            ⚪ Kruh & Geometrie
+        </button>
+        <button class="load-demo-btn px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md hover:bg-brand-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 transition font-medium flex items-center gap-1" data-demo="roots">
+            √ Odmocniny & Goniometrie
+        </button>
+
+        <div class="h-4 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+        <span class="text-gray-400 font-semibold uppercase text-[10px] tracking-wider mr-1 select-none">Vložit:</span>
+
+        <button class="insert-btn px-2 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded hover:bg-brand-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-mono transition" data-insert="`js= sqrt(4.5) `">Inline JS</button>
+        <button class="insert-btn px-2 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded hover:bg-brand-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-mono transition" data-insert="```js&#10;const x = 10;&#10;const y = 20;&#10;return x * y;&#10;```">JS Blok</button>
+        <button class="insert-btn px-2 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded hover:bg-brand-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-mono transition" data-insert="$$\sqrt{x^2 + y^2}$$">LaTeX Blok</button>
+    </div>
+
+    <!-- Main Content Area - Split View -->
+    <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+        <!-- Editor Panel (Left) -->
+        <div class="w-full md:w-1/2 flex flex-col border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 h-1/2 md:h-full">
+            <div class="bg-gray-50 dark:bg-gray-800/80 px-4 py-1.5 border-b border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-500 dark:text-gray-400 flex justify-between items-center select-none">
+                <span><i class="fa-solid fa-pen-to-square me-1"></i> MARKDOWN + JS EDITOR</span>
+                <span id="charCount" class="font-mono text-[11px] opacity-75">0 znaků</span>
+            </div>
+            <textarea id="editor" class="w-full flex-1 p-4 font-mono text-sm bg-transparent border-0 focus:ring-0 focus:outline-none resize-none text-gray-800 dark:text-gray-100 leading-relaxed" placeholder="Pište Markdown, LaTeX vzorce nebo interaktivní JS výpočty..."></textarea>
+        </div>
+
+        <!-- Preview Panel (Right) -->
+        <div class="w-full md:w-1/2 flex flex-col bg-gray-50 dark:bg-gray-900/50 h-1/2 md:h-full overflow-hidden">
+            <div class="bg-gray-50 dark:bg-gray-800/80 px-4 py-1.5 border-b border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-500 dark:text-gray-400 flex justify-between items-center select-none">
+                <span><i class="fa-solid fa-play text-green-500 me-1"></i> ŽIVÝ VÝSTUP & REÁLNÝ JS RUNTIME</span>
+                <span class="text-[11px] text-brand-600 dark:text-brand-400 font-normal flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Evaluated Live
+                </span>
+            </div>
+            <div id="preview" class="flex-1 p-6 overflow-y-auto preview-content text-gray-800 dark:text-gray-100">
+                <!-- Live preview output will render here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2.5 rounded-lg shadow-lg text-sm flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50">
+        <i class="fa-solid fa-circle-check text-green-400" id="toastIcon"></i>
+        <span id="toastMsg">Zpráva</span>
+    </div>
+
+    <script>
+        // Preset Demos
+        const DEMOS = {
+            pythagoras: `# 📐 Výpočet Pythagorovy věty
+
+Definujeme odvěsny pravúhlého trojúhelníku jako proměnné v JavaScriptu:
+
+\`\`\`js
+a = 3;
+b = 4;
+return { a, b };
+\`\`\`
+
+Nyní spočítáme přeponu $c = \\sqrt{a^2 + b^2}$ přímo pomocí JS:
+
+\`\`\`js
+c = sqrt(pow(a, 2) + pow(b, 2));
+return \`Přepona c = \${c}\`;
+\`\`\`
+
+Délka přepony trojúhelníku s odvěsnami \`js= a \` a \`js= b \` je **\`js= c \`**.
+
+### LaTeXové vykreslení vzorce:
+$$c = \\sqrt{a^2 + b^2} = \\sqrt{3^2 + 4^2} = 5$$
+`,
+            circle: `# ⚪ Výpočet vlastností kruhu
+
+Definujeme poloměr kruhu $r$:
+
+\`\`\`js
+r = 4.5;
+O = 2 * pi * r;
+S = pi * pow(r, 2);
+return { Poloměr: r, Obvod: round(O, 2), Obsah: round(S, 2) };
+\`\`\`
+
+### Souhrn výsledků:
+- **Poloměr $r$:** \`js= r \` cm
+- **Obvod $O = 2\\pi r$:** \`js= round(O, 2) \` cm
+- **Obsah $S = \\pi r^2$:** \`js= round(S, 2) \` $\\text{cm}^2$
+`,
+            roots: `# √ Odmocniny, Goniometrie a JS Matematika
+
+Můžete zadávat klasické i pokročilé JS matematické výrazy inline:
+
+### Odmocniny:
+- Odmocnina z 4.5: \`js= sqrt(4.5) \`
+- Třetí odmocnina ze 27: \`js= pow(27, 1/3) \`
+- Kombinovaný výraz: $\\sqrt{16} + \\sqrt{25} =$ \`js= sqrt(16) + sqrt(25) \`
+
+### Goniometrie:
+- $\\sin(30^\\circ)$: \`js= round(sin(30 * pi / 180), 4) \`
+- $\\cos(0)$: \`js= cos(0) \`
+- Konstanty: $\\pi =$ \`js= round(pi, 5) \`, $e =$ \`js= round(e, 5) \`
+`
+        };
+
+        // DOM Elements
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+        const charCount = document.getElementById('charCount');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const copyMdBtn = document.getElementById('copyMdBtn');
+        const downloadMdBtn = document.getElementById('downloadMdBtn');
+        const resetEnvBtn = document.getElementById('resetEnvBtn');
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+
+        // Global Execution Context Store
+        let globalContext = {};
+
+        // Helper Math Functions exposed directly inside JS snippets
+        function createMathEnvironment(context) {
+            return {
+                ...context,
+                // Standard Math Object Shortcuts
+                Math: Math,
+                abs: Math.abs,
+                sqrt: Math.sqrt,
+                cbrt: Math.cbrt,
+                pow: Math.pow,
+                exp: Math.exp,
+                log: Math.log,
+                log10: Math.log10,
+                sin: Math.sin,
+                cos: Math.cos,
+                tan: Math.tan,
+                asin: Math.asin,
+                acos: Math.acos,
+                atan: Math.atan,
+                sinh: Math.sinh,
+                cosh: Math.cosh,
+                tanh: Math.tanh,
+                round: (val, decimals = 4) => Number(Math.round(val + 'e' + decimals) + 'e-' + decimals),
+                floor: Math.floor,
+                ceil: Math.ceil,
+                min: Math.min,
+                max: Math.max,
+                random: Math.random,
+                pi: Math.PI,
+                PI: Math.PI,
+                e: Math.E,
+                E: Math.E
+            };
+        }
+
+        // Safe Evaluator Function
+        function evaluateJSCode(code, context) {
+            try {
+                const env = createMathEnvironment(context);
+                const keys = Object.keys(env);
+                const values = Object.values(env);
+
+                // Create function body that can assign to global window/context variables implicitly if assigned without let/const/var
+                // We inject a proxy/wrapper or variable extract mechanism
+                const wrappedCode = `
+                    "use strict";
+                    ${code.includes('return') ? code : 'return (' + code + ');'}
+                `;
+
+                const evalFn = new Function(...keys, wrappedCode);
+                const result = evalFn(...values);
+
+                return { success: true, result };
+            } catch (err) {
+                return { success: false, error: err.message };
+            }
+        }
+
+        function renderNotebook() {
+            const rawMarkdown = editor.value;
+            charCount.textContent = `${rawMarkdown.length} znaků`;
+
+            // Reset evaluation context for fresh document run
+            globalContext = {};
+
+            // 1. Process ```js blocks first (Top to Bottom evaluation)
+            let processedText = rawMarkdown.replace(/```js\s*([\s\S]*?)\s*```/g, (match, jsCode) => {
+                // Execute code snippet
+                // Extract implicit variable declarations (e.g. a = 5)
+                const lines = jsCode.split('\n');
+                let preparedCode = '';
+
+                lines.forEach(line => {
+                    const trimmed = line.trim();
+                    // Match simple assignment like x = 10 or y = sqrt(4)
+                    if (/^[a-zA-Z_$][a-zA-Z0-9_$]*\s*=.*/.test(trimmed) && !trimmed.startsWith('const') && !trimmed.startsWith('let') && !trimmed.startsWith('var')) {
+                        const varName = trimmed.split('=')[0].trim();
+                        preparedCode += `let ${trimmed}\n`;
+                    } else {
+                        preparedCode += `${line}\n`;
+                    }
+                });
+
+                const res = evaluateJSCode(preparedCode, globalContext);
+
+                // Update global context with assigned variables
+                try {
+                    const extractEnv = createMathEnvironment(globalContext);
+                    const keys = Object.keys(extractEnv);
+                    const values = Object.values(extractEnv);
+                    const extractFn = new Function(...keys, `${preparedCode}\n return { ${Object.keys(globalContext).join(',')}}`);
+                    // Attempt to capture updated variable values
+                } catch(e) {}
+
+                // Also parse manually assigned variables like `a = 5` into globalContext
+                lines.forEach(line => {
+                    const parts = line.trim().split('=');
+                    if (parts.length === 2) {
+                        const varName = parts[0].trim();
+                        if (/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(varName)) {
+                            const valRes = evaluateJSCode(parts[1].replace(';', ''), globalContext);
+                            if (valRes.success && valRes.result !== undefined) {
+                                globalContext[varName] = valRes.result;
+                            }
+                        }
+                    }
+                });
+
+                let outputHtml = `<div class="js-code-block"><div class="text-xs text-sky-400 font-semibold mb-1"><i class="fa-brands fa-js mr-1"></i> JS Výpočet:</div><code>${escapeHtml(jsCode.trim())}</code>`;
+                
+                if (res.success) {
+                    if (res.result !== undefined) {
+                        let displayResult = res.result;
+                        if (typeof res.result === 'object') {
+                            displayResult = JSON.stringify(res.result, null, 2);
+                        }
+                        outputHtml += `<div class="js-code-output">➔ Výsledek: ${escapeHtml(String(displayResult))}</div>`;
+                    }
+                } else {
+                    outputHtml += `<div class="text-red-400 text-xs mt-2">⚠️ Chyba: ${escapeHtml(res.error)}</div>`;
+                }
+
+                outputHtml += `</div>`;
+                return outputHtml;
+            });
+
+            // 2. Process Inline JS Expressions: `js= expression `
+            processedText = processedText.replace(/`js=\s*([^`]+)\s*`/g, (match, jsExpr) => {
+                const res = evaluateJSCode(jsExpr, globalContext);
+                if (res.success) {
+                    let formattedVal = res.result;
+                    if (typeof formattedVal === 'number') {
+                        formattedVal = Math.round(formattedVal * 1000000) / 1000000;
+                    }
+                    return `<span class="eval-badge" title="JS Výraz: ${escapeHtml(jsExpr)}">${formattedVal}</span>`;
+                } else {
+                    return `<span class="eval-error" title="${escapeHtml(res.error)}">⚠️ Chyba</span>`;
+                }
+            });
+
+            // 3. Render Markdown
+            let htmlContent = marked.parse(processedText);
+            preview.innerHTML = htmlContent;
+
+            // 4. Render KaTeX Formulas
+            try {
+                renderMathInElement(preview, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    throwOnError: false
+                });
+            } catch (e) {
+                console.error("KaTeX Error:", e);
+            }
+        }
+
+        // Helper to escape HTML characters
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;")
+                      .replace(/</g, "&lt;")
+                      .replace(/>/g, "&gt;")
+                      .replace(/"/g, "&quot;")
+                      .replace(/'/g, "&#039;");
+        }
+
+        // Insert text helper
+        function insertTextAtCursor(textToInsert) {
+            const start = editor.selectionStart;
+            const end = editor.selectionEnd;
+            const text = editor.value;
+
+            editor.value = text.substring(0, start) + textToInsert + text.substring(end);
+            editor.selectionStart = editor.selectionEnd = start + textToInsert.length;
+            editor.focus();
+            renderNotebook();
+        }
+
+        // Event Listeners
+        editor.addEventListener('input', renderNotebook);
+
+        // Dark mode toggle
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Insert buttons
+        document.querySelectorAll('.insert-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const text = btn.getAttribute('data-insert');
+                if (text) insertTextAtCursor(text);
+            });
+        });
+
+        // Demo buttons
+        document.querySelectorAll('.load-demo-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.getAttribute('data-demo');
+                if (DEMOS[key]) {
+                    editor.value = DEMOS[key];
+                    renderNotebook();
+                    showToast('Ukázka načtena!');
+                }
+            });
+        });
+
+        // Reset Environment
+        resetEnvBtn.addEventListener('click', () => {
+            globalContext = {};
+            renderNotebook();
+            showToast('Stav proměnných byl resetován.');
+        });
+
+        // Copy Markdown
+        copyMdBtn.addEventListener('click', () => {
+            const el = document.createElement('textarea');
+            el.value = editor.value;
+            document.body.appendChild(el);
+            el.select();
+            try {
+                document.execCommand('copy');
+                showToast('Markdown zkopírován do schránky!');
+            } catch (err) {
+                showToast('Chyba při kopírování.');
+            }
+            document.body.removeChild(el);
+        });
+
+        // Download .md file
+        downloadMdBtn.addEventListener('click', () => {
+            const blob = new Blob([editor.value], { type: 'text/markdown;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'math_notebook.md');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('Soubor .md byl stažen!');
+        });
+
+        // Toast Helper
+        function showToast(message) {
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            editor.value = DEMOS.pythagoras;
+            renderNotebook();
+        };
+    </script>
+</body>
+</html>

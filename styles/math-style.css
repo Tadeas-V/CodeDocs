@@ -1,0 +1,408 @@
+:root {
+    /* Barevná paleta pro MathDocs */
+    --bg-color:           #0f172a;
+    --card-bg:            #1e293b;
+    --aside-color:        #13283f;
+    --text-color:         #f8fafc;
+    --text-main:          #f8fafc;
+    --text-muted:         #94a3b8;
+    --accent-color:       #38bdf8;
+    --accent-color-half:  rgba(56, 189, 248, 0.5);
+    --border-color:       #334155;
+    --inline-bg:          rgba(56, 189, 248, 0.1);
+    
+    /* Nadpisy */
+    --header-1:           #38bdf8;
+    --header-2:           #60a5fa;
+    --header-3:           #818cf8;
+    --header-4:           #c084fc;
+    
+    /* Kód a Odkazy */
+    --code:               #6495ed; /* cornflowerblue */
+    --link:               #00ffff; /* aqua */
+    --link-hover:         #c084fc;
+    --ncode:              #fff8dc; /* cornsilk */
+}
+
+/* Základní úprava těla stránky */
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    cursor: default !important;
+}
+
+/*=============================================
+=       SideBar Navigation (Boční panel)      =
+=============================================*/
+
+aside,
+.sidebar {
+    width: 260px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+    background-color: var(--aside-color);
+    padding: 24px 16px;
+    box-sizing: border-box;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar .logo h1 {
+    margin-bottom: 24px;
+    padding-left: 8px;
+    font-size: 1.5rem;
+    border-bottom: none;
+}
+
+.sidebar .logo a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: inherit;
+}
+
+.menu-section {
+    margin-top: 24px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 2px;
+}
+
+.sidebar a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a:focus {
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.08);
+    outline: 2px solid var(--accent-color);
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    color: var(--accent-color);
+    background-color: rgba(56, 189, 248, 0.12);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.sidebar a.nonactive {
+    color: #475569;
+    cursor: not-allowed;
+    position: relative;
+    user-select: none;
+    text-decoration: none;
+}
+
+.sidebar a.nonactive:hover {
+    background-color: transparent;
+    color: #475569;
+    text-decoration: none;
+}
+
+.sidebar a.nonactive::after {
+    content: "⛔️";
+    font-size: 0.75rem;
+    position: absolute;
+    right: 10px;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.sidebar h3 {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 12px;
+}
+
+/*=============================================
+=      Main Content Area (Hlavní oblast)      =
+=============================================*/
+
+main,
+.content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex-grow: 1;
+    padding: 48px 64px;
+    max-width: 900px;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #fb923c; 
+    font-size: 2.3rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-top: 0;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #fb923c80;
+}
+
+h2 {
+    color: #f472b6; 
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f472b680;
+}
+
+h3 {
+    color: #4ade80; 
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+h4 {
+    color: #fb923c; 
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 22px;
+    margin-bottom: 8px;
+}
+
+p {
+    color: var(--text-main);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Typografie a značky */
+code, kbd, samp, var {
+    padding: 0.15em 0.4em;
+    font-size: inherit;
+}
+
+code {
+    color: var(--code);
+    background-color: #1e293b;
+    border-radius: 5px;
+}
+
+code.ncode {
+    color: var(--ncode);
+    border: solid 1px var(--ncode);
+}
+
+kbd {
+    font-family: monospace;
+    background-color: #1e293b;
+    border: solid 1px #475569;
+    padding: 0.15em 0.4em;
+}
+
+samp { font-family: monospace; }
+var { font-style: italic; }
+
+ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+ul li {
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
+}
+
+ul li code, ul li kbd, ul li samp, ul li var {
+    margin: 0 0.15em;
+    display: inline-block;
+    line-height: 1.2;
+}
+
+a {
+    color: var(--link);
+}
+
+a:hover {
+    color: var(--link-hover);
+    text-decoration: solid underline;
+}
+
+b { font-weight: 600; }
+strong { font-weight: 700; }
+
+/*=============================================
+=     STYLIZATE KATEX (Matematický zápis)     =
+=============================================*/
+
+/* Inline matematika: $ ... $ */
+.katex {
+    font-size: 1.1em;
+    color: var(--text-color);
+    padding: 2px 6px;
+}
+
+/* Bloková matematika: $$ ... $$ */
+.katex-display {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow-x: auto; /* Pro dlouhé vzorce na mobilních zařízeních */
+}
+
+.katex-display .katex {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text-color);
+}
+
+/*=============================================
+=                 Prism style                 =
+=============================================*/
+
+pre[class*="language-"] {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+pre[class*="language-"] code {
+    border: none;
+}
+
+div.code-toolbar {
+    position: relative !important;
+    margin-bottom: 20px;
+}
+
+div.code-toolbar > pre[class*="language-"] {
+    padding-top: 42px !important;
+}
+
+.line-highlight {
+    margin-top: 42px !important;
+    background: rgba(56, 189, 248, 0.10) !important;
+    border-left: 2px solid #38bdf8bf !important;
+}
+
+.line-numbers .line-highlight {
+    margin-top: 40px !important;
+}
+
+.line-highlight::before,
+.line-highlight::after {
+    background: var(--accent-color-half) !important;
+}
+
+div.code-toolbar > .toolbar {
+    position: absolute !important;
+    top: 1em !important;
+    left: 12px !important;
+    right: 12px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+}
+
+div.code-toolbar > .toolbar .toolbar-item {
+    display: inline-block !important;
+    pointer-events: auto !important;
+}
+
+div.code-toolbar > .toolbar .toolbar-item:first-child span {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color-half);
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+div.code-toolbar > .toolbar .toolbar-item:first-child span:hover {
+    color: var(--accent-color) !important;
+    cursor: default !important;
+}
+
+div.code-toolbar > .toolbar .toolbar-item button {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-main) !important;
+    font-size: 0.75rem !important;
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--border-color) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    text-transform: uppercase !important;
+}
+
+div.code-toolbar > .toolbar .toolbar-item button:hover {
+    background: var(--accent-color) !important;
+    color: #12151c !important;
+    font-weight: 600 !important;
+}
+
+/*=============================================
+=                   Footer                    =
+=============================================*/
+
+footer {
+    margin-top: auto; 
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/*=============================================
+=              Speciální AI tagy              =
+=============================================*/
+
+span.claude { color: coral; font-weight: bold; font-style: italic; } span.claude > * { color: coral !important; font-family: 'Segoe UI', sans-serif; }
+span.chatgpt { color: dimgray; font-weight: bold; font-style: italic; } span.chatgpt > * { color: dimgray !important; font-family: 'Segoe UI', sans-serif; }
+span.gemini { color: cornflowerblue; font-weight: bold; font-style: italic; } span.gemini > * { color: cornflowerblue !important; font-family: 'Segoe UI', sans-serif; }
+span.antigravity { color: cadetblue; font-weight: bold; font-style: italic; } span.antigravity > * { color: cadetblue !important; font-family: 'Segoe UI', sans-serif; }
+span.other { color: crimson; font-weight: bold; font-style: italic; } span.other > * { color: crimson !important; font-family: 'Segoe UI', sans-serif; }

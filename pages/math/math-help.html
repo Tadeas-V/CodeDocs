@@ -29,7 +29,7 @@
     <aside class="sidebar">
         <div class="logo">
             <h1><a href="./index.html">
-                    📐 MathHelp
+                    📝 MathDocs
             </a></h1>
         </div>
 
@@ -41,9 +41,6 @@
                 <li><a href="./js-math-markdown.html">
                     🔢 JS Math Markdown Editor
                 </a></li>
-                <li><a href="./index.html">
-                    📝 MathDocs
-                </a></li>
                 <li><a href="./math-help.html" class="active">
                     📐 MathHelp
                 </a></li>
@@ -52,11 +49,1338 @@
     </aside>
     
 <!--============================================
-=            Hlavní struktura                  =
+=               Hlavní struktura              =
 =============================================-->
 
     <main class="content">
-        <h1>📐 MathHelp</h1>
+        <h1>📐 MathHelp & Návod na KaTeX</h1>
+        
+        <p>Tento manuál slouží jako rychlý přehled toho, jak správně psát matematické vzorce a výrazy pomocí syntaxe KaTeX na těchto stránkách.</p>
+
+        <section>
+            <h2>Základní syntaktické znaky</h2>
+            <h3>Inline zápis</h3>
+
+            <p>
+                Značí se symbolem dolar <kbd>&dollar;</kbd> po obou stranách: <code>$ matematický výraz $</code>. Tento formát se používá pro proměnné, čísla nebo krátké výrazy, které mají plynule zapadnout do běžného odstavce. Zde na stránkách jsou však stylisticky zvýrazněné, aby byli vidět.
+            </p>
+            <p>
+                Pro příklad použijme zápis lineární funkce:
+            </p>
+            
+            <pre data-language="katex zápis"><code class="lang-html">
+                Lineární funkce: $ f(x) = k \cdot x + q $.
+            </code></pre>
+
+            <p>
+                <b>Výsledek pak bude:</b><br><br>
+                Lineární funkce:
+                $ f(x) = k \cdot x + q $.
+            </p>
+
+            <h3>Multiline zápis</h3>
+
+            <p>
+                Značí se dvěma symboly dolaru <kbd>&dollar;&dollar;</kbd> po obou stranách: <code>$$ matematický výraz $$</code>.
+                Používá se pro větší, důležité nebo složitější rovnice, nebo prostě pro jejich lepší přehlednost.
+            </p>
+            <p>
+                Pro příklad použijme znovu zápis lineární funkce:
+            </p>
+            
+            <pre data-language="katex zápis"><code class="lang-html">
+                Lineární funkce:
+                $$
+                f(x) = k \cdot x + q
+                $$
+            </code></pre>
+
+            <p>
+                <b>Výsledek pak bude:</b><br><br>
+                Lineární funkce:
+                $$
+                f(x) = k \cdot x + q
+                $$
+            </p>
+
+        </section>
+
+        <section>
+            <h2>Potřebné vzory (Tahák KaTeX)</h2>
+            <p>Přehledně strukturovaná příručka nejpoužívanějších příkazů a symbolů rozdělená podle kategorií.</p>
+
+            <h3>Základní operace a základy</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mocnina / Horní index</td>
+                            <td>
+                                <kbd>x^2</kbd><br>
+                                <kbd>x^{10}</kbd>
+                            </td>
+                            <td>
+                                $x^2$<br>
+                                $x^{10}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dolní index</td>
+                            <td>
+                                <kbd>x_2</kbd><br>
+                                <kbd>x_{i,j}</kbd>
+                            </td>
+                            <td>
+                                $x_2$<br>
+                                $x_{n,m}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Odmocnina</td>
+                            <td>
+                                <kbd>\sqrt{4}</kbd><br>
+                                <kbd>\sqrt[3]{8}</kbd>
+                            </td>
+                            <td>
+                                $\sqrt{4}$<br>
+                                $\sqrt[3]{8}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Zlomek (textový)</td>
+                            <td><kbd>\frac{a}{b}</kbd></td>
+                            <td>$\frac{a}{b}$</td>
+                        </tr>
+                            <td>
+                                Zlomek (dispay text)<br>
+                                <span style="color: gray;">
+                                    Vynutí si plnou velikost písma.
+                                </span>
+                            </td>
+                            <td><kbd>\dfrac{a}{b}</kbd></td>
+                            <td>$\dfrac{a}{b}$</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Řetězový zlomek<br>
+                                <span style="color: gray;">
+                                    Slouží ke skládání zlomků do sebe.
+                                </span>
+                            </td>
+                            <td><kbd>\cfrac{a}{b}</kbd></td>
+                            <td>$\cfrac{a}{b}$</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Textový zlomek<br>
+                                <span style="color: gray;">
+                                    Vynutí si zmenšení na velikost textu.
+                                </span>
+                            </td>
+                            <td><kbd>\tfrac{a}{b}</kbd></td>
+                            <td>$\tfrac{a}{b}$</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Vlastní tloušťka zlomkové čáry ve zlomku<br>
+                                <span style="color: gray;">
+                                    Lze použít: <code>pt</code>, <code>mm</code>, <code>cm</code>, <code>in</code>, <code>em</code> a <code>ex</code>.
+                                </span>
+                            </td>
+                            <td><kbd>a \above{1pt} b</kbd></td>
+                            <td>$a \above{1pt} b$</td>
+                        </tr>
+                        <tr>
+                            <td>Zlomek na jiné způsoby</td>
+                            <td>
+                                <kbd>a \over b</kbd>
+                                <kbd>a / b</kbd>
+                            </td>
+                            <td>
+                                $a \over b$
+                                $a / b$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vektor</td>
+                            <td><kbd>\vec{a}</kbd></td>
+                            <td>$\vec{a}$</td>
+                        </tr>
+                        <tr>
+                            <td>lepší vektor</td>
+                            <td>
+                                <kbd>\overrightarrow{a}</kbd><br>
+                                <kbd>\overleftarrow{a}</kbd>
+                            </td>
+                            <td>
+                                $\overrightarrow{a}$<br>
+                                $\overleftarrow{a}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nadtržení</td>
+                            <td><kbd>\overline{AB}</kbd></td>
+                            <td>$\overline{AB}$</td>
+                        </tr>
+                        <tr>
+                            <td>Podtržení</td>
+                            <td><kbd>\underline{AB}</kbd></td>
+                            <td>$\underline{AB}$</td>
+                        </tr>
+                        <tr>
+                            <td>overlinesegment</td>
+                            <td><kbd>\overlinesegment{AB}</kbd></td>
+                            <td>$\overlinesegment{AB}$</td>
+                        </tr>
+                        <tr>
+                            <td>underlinesegment</td>
+                            <td><kbd>\underlinesegment{AB}</kbd></td>
+                            <td>$\underlinesegment{AB}$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Relace a matematické operátory</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sčítání</td>
+                            <td><kbd>a + b</kbd></td>
+                            <td>$a + b$</td>
+                        </tr>
+                        <tr>
+                            <td>Odčítání</td>
+                            <td><kbd>a - b</kbd></td>
+                            <td>$a - b$</td>
+                        </tr>
+                        <tr>
+                            <td>Plusmínus / Mínusplus</td>
+                            <td>
+                                <kbd>a \mp b</kbd><br>
+                                <kbd>a \mp b</kbd>
+                            </td>
+                            <td>
+                                $a \pm b$<br>
+                                $a \mp b$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Násobení</td>
+                            <td>
+                                <kbd>a \cdot b</kbd><br>
+                                <kbd>a \times b</kbd>
+                            </td>
+                            <td>
+                                $a \cdot b$<br>
+                                $a \times b$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dělení</td>
+                            <td><kbd>a \div b</kbd></td>
+                            <td>$a \div b$</td>
+                        </tr>
+                        <tr>
+                            <td>Menší než</td>
+                            <td>
+                                <kbd>a &lt; b</kbd><br>
+                                <kbd>a \lt b</kbd>
+                            </td>
+                            <td>
+                                $a &lt; b$<br>
+                                $a \lt b$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Není menší než</td>
+                            <td><kbd>a \nless b</kbd></td>
+                            <td>$a \nless b$</td>
+                        </tr>
+                        <tr>
+                            <td>Menší nebo rovno</td>
+                            <td><kbd>a \leq b</kbd></td>
+                            <td>$a \leq b$</td>
+                        </tr>
+                        <tr>
+                            <td>Není menší nebo rovno</td>
+                            <td><kbd>a \nleq b</kbd></td>
+                            <td>$a \nleq b$</td>
+                        </tr>
+                        <tr>
+                            <td>Větší než</td>
+                            <td>
+                                <kbd>a &gt; b</kbd><br>
+                                <kbd>a \gt b</kbd>
+                            </td>
+                            <td>
+                                $a &gt; b$<br>
+                                $a \gt b$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Není větší než</td>
+                            <td><kbd>a \ngtr b</kbd></td>
+                            <td>$a \ngtr b$</td>
+                        </tr>
+                        <tr>
+                            <td>Větší nebo rovno</td>
+                            <td><kbd>\geq</kbd></td>
+                            <td>$a \geq b$</td>
+                        </tr>
+                            <td>Není větší nebo rovno</td>
+                            <td><kbd>\ngeq</kbd></td>
+                            <td>$a \ngeq b$</td>
+                        </tr>
+                        <tr>
+                            <td>Rovno</td>
+                            <td><kbd>a = b</kbd></td>
+                            <td>$a = b$</td>
+                        </tr>
+                        <tr>
+                            <td>Nerovno</td>
+                            <td><kbd>a \neq b</kbd></td>
+                            <td>$a \neq b$</td>
+                        </tr>
+                        <tr>
+                            <td>Zaokrouhleno</td>
+                            <td>
+                                <kbd>a \approx b</kbd><br>
+                                <kbd>a \doteq b</kbd>
+                            </td>
+                            <td>
+                                $a \approx b$<br>
+                                $a \doteq b$
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+            <h3>Matematické operátory a jednotky</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sinus / Arkus sinus</td>
+                            <td>
+                                <kbd>\sin</kbd><br>
+                                <kbd>\arcsin</kbd>
+                            </td>
+                            <td>
+                                $\sin$<br>
+                                $\arcsin$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kosinus / Arkus Kosinus</td>
+                            <td>
+                                <kbd>\cos</kbd><br>
+                                <kbd>\arccos</kbd>
+                            </td>
+                            <td>
+                                $\cos$<br>
+                                $\arccos$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tangens / Arkus Tangens</td>
+                            <td>
+                                <kbd>\tan</kbd><br>
+                                <kbd>\arctan</kbd>
+                            </td>
+                            <td>
+                                $\tan$<br>
+                                $\arctan$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kotangens / Arkus Kotangens</td>
+                            <td>
+                                <kbd>\cotg</kbd><br>
+                                <kbd>\arcctg</kbd>
+                            </td>
+                            <td>
+                                $\cotg$<br>
+                                $\arcctg$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Minuta</td>
+                            <td><kbd>\min</kbd></td>
+                            <td>$\min$</td>
+                        </tr>
+                        <tr>
+                            <td>Sekunda</td>
+                            <td><kbd>\sec</kbd></td>
+                            <td>$\sec$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Závorky a přizpůsobitelná ohraničení</h3>
+            <p>Pro automatické přizpůsobení výšky závorek obsahu použijte předponu <kbd>\left</kbd> a <kbd>\right</kbd>.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dynamické (přizpůsobené)</td>
+                            <td><kbd>\left( \frac{a}{b} \right)</kbd></td>
+                            <td>$\left( \frac{a}{b} \right)$</td>
+                        </tr>
+                        <tr>
+                            <td>Kulaté</td>
+                            <td>
+                                <kbd>( a )</kbd><br>
+                                <kbd>\lparen a \rparen</kbd>
+                            </td>
+                            <td>$( a )$</td>
+                        </tr>
+                        <tr>
+                            <td>Hranaté</td>
+                            <td>
+                                <kbd>[ a ]</kbd><br>
+                                <kbd>\lbrack a \rbrack</kbd>
+                            </td>
+                            <td>$[ a ]$</td>
+                        </tr>
+                        <tr>
+                            <td>Složené</td>
+                            <td>
+                                <kbd>\{ a \}</kbd><br>
+                                <kbd>\lbrace a \rbrace</kbd>
+                            </td>
+                            <td>$\{ a \}$</td>
+                        </tr>
+                        <tr>
+                            <td>Špičaté</td>
+                            <td>
+                                <kbd>\langle a \rangle</kbd><br>
+                                <kbd>\lang a \rang</kbd>
+                            </td>
+                            <td>$\langle a \rangle$</td>
+                        </tr>
+                        <tr>
+                            <td>group?</td>
+                            <td><kbd>\lgroup a \rgroup</kbd></td>
+                            <td>$\lgroup a \rgroup$</td>
+                        </tr>
+                        <tr>
+                            <td>Absolutní hodnota / Délka</td>
+                            <td>
+                                <kbd>|a|</kbd><br>
+                                <kbd>\vert a \vert</kbd>
+                            </td>
+                            <td>$|a|$</td>
+                        </tr>
+                        <tr>
+                            <td>ceil</td>
+                            <td><kbd>\lceil a \rceil</kbd></td>
+                            <td>$\lceil a \rceil$</td>
+                        </tr>
+                        <tr>
+                            <td>floor</td>
+                            <td><kbd>\lfloor a \rfloor</kbd></td>
+                            <td>$\lfloor a \rfloor$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Řecká abeceda (velká)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Zápis</th>
+                            <th>Písmeno</th>
+                            <th>Zápis</th>
+                            <th>Písmeno</th>
+                            <th>Zápis</th>
+                            <th>Písmeno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><kbd>\Alpha</kbd></td>
+                            <td>$\Alpha$</td>
+                            <td><kbd>\Beta</kbd></td>
+                            <td>$\Beta$</td>
+                            <td><kbd>\Gamma</kbd></td>
+                            <td>$\Gamma$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\Delta</kbd></td>
+                            <td>$\Delta$</td>
+                            <td><kbd>\Epsilon</kbd></td>
+                            <td>$\Epsilon$</td>
+                            <td><kbd>\Zeta</kbd></td>
+                            <td>$\Zeta$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\Eta</kbd></td>
+                            <td>$\Eta$</td>
+                            <td><kbd>\Theta</kbd></td>
+                            <td>$\Theta$</td>
+                            <td><kbd>\Iota</kbd></td>
+                            <td>$\Iota$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\Kappa</kbd></td>
+                            <td>$\Kappa$</td>
+                            <td><kbd>\Lambda</kbd></td>
+                            <td>$\Lambda$</td>
+                            <td><kbd>\Mu</kbd></td>
+                            <td>$\Mu$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\Nu</kbd></td>
+                            <td>$\Nu$</td>
+                            <td><kbd>\Xi</kbd></td>
+                            <td>$\Xi$</td>
+                            <td><kbd>\Omicron</kbd></td>
+                            <td>$\Omicron$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\Pi</kbd></td>
+                            <td>$\Pi$</td>
+                            <td><kbd>\Rho</kbd></td>
+                            <td>$\Rho$</td>
+                            <td><kbd>\Sigma</kbd></td>
+                            <td>$\Sigma$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\Tau</kbd></td>
+                            <td>$\Tau$</td>
+                            <td><kbd>\Upsilon</kbd></td>
+                            <td>$\Upsilon$</td>
+                            <td><kbd>\Phi</kbd></td>
+                            <td>$\Phi$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\Chi</kbd></td>
+                            <td>$\Chi$</td>
+                            <td><kbd>\Psi</kbd></td>
+                            <td>$\Psi$</td>
+                            <td><kbd>\Omega</kbd></td>
+                            <td>$\Omega$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Řecká abeceda (malá)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Zápis</th>
+                            <th>Písmeno</th>
+                            <th>Zápis</th>
+                            <th>Písmeno</th>
+                            <th>Zápis</th>
+                            <th>Písmeno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><kbd>\alpha</kbd></td>
+                            <td>$\alpha$</td>
+                            <td><kbd>\beta</kbd></td>
+                            <td>$\beta$</td>
+                            <td><kbd>\gamma</kbd></td>
+                            <td>$\gamma$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\delta</kbd></td>
+                            <td>$\delta$</td>
+                            <td><kbd>\epsilon</kbd></td>
+                            <td>$\epsilon$</td>
+                            <td><kbd>\zeta</kbd></td>
+                            <td>$\zeta$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\eta</kbd></td>
+                            <td>$\eta$</td>
+                            <td><kbd>\theta</kbd></td>
+                            <td>$\theta$</td>
+                            <td><kbd>\iota</kbd></td>
+                            <td>$\iota$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\kappa</kbd></td>
+                            <td>$\kappa$</td>
+                            <td><kbd>\lambda</kbd></td>
+                            <td>$\lambda$</td>
+                            <td><kbd>\mu</kbd></td>
+                            <td>$\mu$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\nu</kbd></td>
+                            <td>$\nu$</td>
+                            <td><kbd>\xi</kbd></td>
+                            <td>$\xi$</td>
+                            <td><kbd>\omicron</kbd></td>
+                            <td>$\omicron$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\pi</kbd></td>
+                            <td>$\pi$</td>
+                            <td><kbd>\rho</kbd></td>
+                            <td>$\rho$</td>
+                            <td><kbd>\sigma</kbd></td>
+                            <td>$\sigma$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\tau</kbd></td>
+                            <td>$\tau$</td>
+                            <td><kbd>\upsilon</kbd></td>
+                            <td>$\upsilon$</td>
+                            <td><kbd>\phi</kbd></td>
+                            <td>$\phi$</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>\chi</kbd></td>
+                            <td>$\chi$</td>
+                            <td><kbd>\psi</kbd></td>
+                            <td>$\psi$</td>
+                            <td><kbd>\omega</kbd></td>
+                            <td>$\omega$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Číselné obory</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Přirozená</td>
+                            <td>
+                                <kbd>\mathbb{N}</kbd><br>
+                                <kbd>\N</kbd><br>
+                                <kbd>\natnums</kbd>
+                            </td>
+                            <td>$\mathbb{N}$</td>
+                        </tr>
+                        <tr>
+                            <td>Celá</td>
+                            <td>
+                                <kbd>\mathbb{Z}</kbd><br>
+                                <kbd>\Z</kbd>
+                            </td>
+                            <td>$\mathbb{Z}$</td>
+                        </tr>
+                        <tr>
+                            <td>Racionální</td>
+                            <td><kbd>\mathbb{Q}</kbd></td>
+                            <td>$\mathbb{Q}$</td>
+                        </tr>
+                        <tr>
+                            <td>Iracionální</td>
+                            <td><kbd>\mathbb{I}</kbd></td>
+                            <td>$\mathbb{I}$</td>
+                        </tr>
+                        <tr>
+                            <td>Reálná</td>
+                            <td>
+                                <kbd>\mathbb{R}</kbd><br>
+                                <kbd>\R</kbd><br>
+                                <kbd>\Reals</kbd><br>
+                                <kbd>\reals</kbd>
+                            </td>
+                            <td>$\mathbb{R}$</td>
+                        </tr>
+                        <tr>
+                            <td>Complexní</td>
+                            <td>
+                                <kbd>\mathbb{C}</kbd><br>
+                                <kbd>\Complex</kbd><br>
+                                <kbd>\cnums</kbd>
+                            </td>
+                            <td>$\mathbb{C}$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Množinová logika</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Průnik</td>
+                            <td><kbd>a \cap b</kbd></td>
+                            <td>$a \cap b$</td>
+                        </tr>
+                        <tr>
+                            <td>Sjednocení</td>
+                            <td><kbd>a \cup b</kbd></td>
+                            <td>$a \cup b$</td>
+                        </tr>
+                        <tr>
+                            <td>Náleží</td>
+                            <td><kbd>a \in b</kbd></td>
+                            <td>$a \in b$</td>
+                        </tr>
+                            <td>Nenáleží</td>
+                            <td><kbd>a \notin b</kbd></td>
+                            <td>$a \notin b$</td>
+                        </tr>
+                        <tr>
+                            <td>Obsahuje</td>
+                            <td>
+                                <kbd>a \ni b</kbd><br>
+                                <kbd>a \owns b</kbd>
+                            </td>
+                            <td>$a \ni b$</td>
+                        </tr>
+                            <td>Neobsahuje</td>
+                            <td><kbd>a \notni b</kbd></td>
+                            <td>$a \notni b$</td>
+                        </tr>
+                        <tr>
+                            <td>Implikace</td>
+                            <td><kbd>a \implies b</kbd></td>
+                            <td>$a \implies b$</td>
+                        </tr>
+                            <td>Ekvivalence</td>
+                            <td><kbd>a \iff b</kbd></td>
+                            <td>$a \iff b$</td>
+                        </tr>
+                        <tr>
+                            <td>Popisované šipky</td>
+                            <td><kbd>a \xrightarrow{\text{text}} b</kbd></td>
+                            <td>$a \xrightarrow{\text{text}} b$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Sumy, integrály a speciální symboly</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Suma</td>
+                            <td><kbd>\displaystyle \sum i</kbd></td>
+                            <td>$\displaystyle \sum i$</td>
+                        </tr>
+                        <tr>
+                            <td>Suma s mezemi</td>
+                            <td><kbd>\displaystyle \sum_{i=1}^n i</kbd></td>
+                            <td>$\displaystyle \sum_{i=1}^n i$</td>
+                        </tr>
+                        <tr>
+                            <td>Integrál</td>
+                            <td><kbd>\int_{a}^{b} f(x) dx</kbd></td>
+                            <td>$\int_{a}^{b} f(x) dx$</td>
+                        </tr>
+                        <tr>
+                            <td>Nekonečno</td>
+                            <td><kbd>\infty</kbd></td>
+                            <td>$\infty$</td>
+                        </tr>
+                        <tr>
+                            <td>Loga a značky KaTeX / LaTeX</td>
+                            <td>
+                                <kbd>\KaTeX</kbd><br>
+                                <kbd>\LaTeX</kbd>
+                            </td>
+                            <td>
+                                $\KaTeX$<br>
+                                $\LaTeX$
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Úhly</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Úhel</td>
+                            <td><kbd>\angle</kbd></td>
+                            <td>$\angle$</td>
+                        </tr>
+                        <tr>
+                            <td>Měřený úhel</td>
+                            <td><kbd>\measuredangle</kbd></td>
+                            <td>$\measuredangle$</td>
+                        </tr>
+                        <tr>
+                            <td>Sférický úhel</td>
+                            <td><kbd>\sphericalangle</kbd></td>
+                            <td>$\sphericalangle$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Tvary</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trojúhelník</td>
+                            <td><kbd>\triangle</kbd></td>
+                            <td>$\triangle$</td>
+                        </tr>
+                        <tr>
+                            <td>Čtverec</td>
+                            <td>
+                                <kbd>\Box</kbd><br>
+                                <kbd>\square</kbd>
+                            </td>
+                            <td>
+                                $\Box$<br>
+                                $\square$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kosodelník / diamand</td>
+                            <td><kbd>\diamonds</kbd></td>
+                            <td>$\diamonds$</td>
+                        </tr>
+                        <tr>
+                            <td>Mnohoúhelník / Hvězda</td>
+                            <td><kbd>\bigstar</kbd></td>
+                            <td>$\bigstar$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Formátování textu a barvy</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Efekt</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tučné písmo</td>
+                            <td><kbd>\bold{text}</kbd></td>
+                            <td>$\bold{text}$</td>
+                        </tr>
+                        <tr>
+                            <td>Kurzíva</td>
+                            <td><kbd>\it{text}</kbd></td>
+                            <td>$\it{text}$</td>
+                        </tr>
+                        <tr>
+                            <td>Barva textu</td>
+                            <td>
+                                <kbd>\color{yellow}{Text}</kbd><br>
+                                <kbd>\textcolor{#e74c3c}{Text}</kbd>
+                            </td>
+                            <td>
+                                $\color{yellow}{Text}$<br>
+                                $\textcolor{#e74c3c}{Text}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Zvýraznění pozadí</td>
+                            <td>
+                                <kbd>\colorbox{magenta}{Text}</kbd><br>
+                                <kbd>\colorbox{#f39c12}{Text}</kbd>
+                            </td>
+                            <td>
+                                $\colorbox{magenta}{Text}$<br>
+                                $\colorbox{#f39c12}{Text}$
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Velikost textu</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Velikost</th>
+                            <th>Zápis</th>
+                            <th>Výsledek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>tiny</td>
+                            <td><kbd>\tiny{A}</kbd></td>
+                            <td>$\tiny{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>script</td>
+                            <td><kbd>\scriptsize{A}</kbd></td>
+                            <td>$\scriptsize{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>footnote</td>
+                            <td><kbd>\footnotesize{A}</kbd></td>
+                            <td>$\footnotesize{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>small</td>
+                            <td><kbd>\small{A}</kbd></td>
+                            <td>$\small{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>normal</td>
+                            <td><kbd>\normalsize{A}</kbd></td>
+                            <td>$\normalsize{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>large</td>
+                            <td><kbd>\large{A}</kbd></td>
+                            <td>$\large{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>Large</td>
+                            <td><kbd>\Large{A}</kbd></td>
+                            <td>$\Large{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>LARGE</td>
+                            <td><kbd>\LARGE{A}</kbd></td>
+                            <td>$\LARGE{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>huge</td>
+                            <td><kbd>\huge{A}</kbd></td>
+                            <td>$\huge{A}$</td>
+                        </tr>
+                            
+                        <tr>
+                            <td>Huge</td>
+                            <td><kbd>\Huge{A}</kbd></td>
+                            <td>$\Huge{A}$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Další symboly</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Název</td>
+                            <td>Zápis</td>
+                            <td>Výsledek</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stupně, minuty sekundy</td>
+                            <td>
+                                <kbd>
+                                    1 \degree
+                                    24^{\prime}
+                                    64,58^{\prime\prime}
+                                </kbd><br>
+                                <kbd>1\degree 24' 64,58''</kbd><br>
+                                <kbd>1° 24' 64,58''</kbd>
+                            </td>
+                            <td>
+                                $
+                                  1 \degree
+                                  24^{\prime}
+                                  64,58^{\prime\prime}
+                                $<br>
+                                $1\degree 24' 64,58''$<br>
+                                $1° 24' 64,58''$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ohraničení</td>
+                            <td><kbd>\boxed{\pi = \frac c d}</kbd></td>
+                            <td>$\boxed{\pi = \frac c d}$</td>
+                        </tr>
+                        <tr>
+                            <td>Procento</td>
+                            <td><kbd>\%</kbd></td>
+                            <td>$\%$</td>
+                        </tr>
+                        <tr>
+                            <td>Hash</td>
+                            <td><kbd>\#</kbd></td>
+                            <td>$\#$</td>
+                        </tr>
+                        <tr>
+                            <td>Podtržítko</td>
+                            <td><kbd>\_</kbd></td>
+                            <td>$\_$</td>
+                        </tr>
+                        <tr>
+                            <td>Backslash (zpětné lomítko)</td>
+                            <td><kbd>\backslash</kbd></td>
+                            <td>$\backslash$</td>
+                        </tr>
+                        <tr>
+                            <td>Copyright</td>
+                            <td><kbd>\copyright</kbd></td>
+                            <td>$\copyright$</td>
+                        </tr>
+                        <tr>
+                            <td>Trojtečka</td>
+                            <td><kbd>\dots</kbd></td>
+                            <td>$\dots$</td>
+                        </tr>
+                        <tr>
+                            <td>Centrální (horizontální) trojtečka</td>
+                            <td><kbd>\cdots</kbd></td>
+                            <td>$\cdots$</td>
+                        </tr>
+                        <tr>
+                            <td>Vertikální trojtečka</td>
+                            <td><kbd>\vdots</kbd></td>
+                            <td>$\vdots$</td>
+                        </tr>
+                        <tr>
+                            <td>Binomiál</td>
+                            <td>
+                                <kbd>\binom{a}{b}</kbd>
+                            </td>
+                            <td>
+                                $\binom{a}{b}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Binomiál (display text)</td>
+                            <td>
+                                <kbd>\dbinom{a}{b}</kbd>
+                            </td>
+                            <td>
+                                $\dbinom{a}{b}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>textový binomiál</td>
+                            <td>
+                                <kbd>\tbinom{a}{b}</kbd>
+                            </td>
+                            <td>
+                                $\tbinom{a}{b}$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Binomiál (jiný způsob)</td>
+                            <td>
+                                <kbd>a \choose b</kbd>
+                            </td>
+                            <td>
+                                $a \choose b$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Binomiál (závorkové)</td>
+                            <td>
+                                <kbd>a \brack b</kbd><br>
+                                <kbd>a \brace b</kbd>
+                            </td>
+                            <td>
+                                $a \brack b$<br>
+                                $a \brace b$
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><kbd></kbd></td>
+                            <td>$$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!--
+        <section>
+            <h2>Potřebné vzory</h2>
+
+            <h3>Horní index / Mocnina</h3>
+            <p><kbd>x^2</kbd> &rArr; $x^2$</p>
+            
+            <h3>Dolní index</h3>
+            <p><kbd>x_2</kbd> &rArr; $x_2$</p>
+
+            <h3>Odmocnina ze dvou</h3>
+            <p><kbd>\sqrt{4}</kbd> &rArr; $\sqrt{4}$</p>
+            
+            <h3>Odmocnina ze tří a více</h3>
+            <p><kbd>\sqrt[3]{8}</kbd> &rArr; $\sqrt[3]{8}$</p>
+
+            <h3>Zlomek</h3>
+            <p><kbd>\frac{1}{2}</kbd> &rArr; $\frac{1}{2}$</p>
+            
+            <h3>Znaménka:</h3>
+            <p><kbd>a = b</kbd> &rArr; $a = b$</p>
+            <p><kbd>a + b</kbd> &rArr; $a + b$</p>
+            <p><kbd>a - b</kbd> &rArr; $a - b$</p>
+            <p><kbd>a &lt; b</kbd> &rArr; $a &lt; b$</p>
+            <p><kbd>a &gt; b</kbd> &rArr; $a &gt; b$</p>
+            <p><kbd>a \times b</kbd> &rArr; $a \times b$</p>
+            <p><kbd>a \cdot b</kbd> &rArr; $a \cdot b$</p>
+            <p><kbd>a : b</kbd> &rArr; $a : b$</p>
+            <p><kbd>a \approx b</kbd> &rArr; $a \approx b$</p>
+            <p><kbd>a \doteq b</kbd> &rArr; $a \doteq b$</p>
+            <p><kbd>a \le b</kbd> &rArr; $a \le b$</p>
+            <p><kbd>a \leq b</kbd> &rArr; $a \leq b$</p>
+            <p><kbd>a \lt b</kbd> &rArr; $a \lt b$</p>
+            <p><kbd>a \owns b</kbd> &rArr; $a \owns b$</p>
+            <p><kbd>a \ne b</kbd> &rArr; $a \ne b$</p>
+            <p><kbd>a \neq b</kbd> &rArr; $a \neq b$</p>
+            <p><kbd>a \And b</kbd> &rArr; $a \And b$</p>
+            <p><kbd>a \cap b</kbd> &rArr; $a \cap b$</p>
+            <p><kbd>a \cup b</kbd> &rArr; $a \cup b$</p>
+            <p><kbd>a \div b</kbd> &rArr; $a \div b$</p>
+            <p><kbd>a \intercal b</kbd> &rArr; $a \intercal b$</p>
+            <p><kbd>a \mp b</kbd> &rArr; $a \mp b$</p>
+            <p><kbd>a \pm b</kbd> &rArr; $a \pm b$</p>
+            <p><kbd>a \geq b</kbd> &rArr; $a \geq b$</p>
+            <p><kbd>a \nleq b</kbd> &rArr; $a \nleq b$</p>
+            <p><kbd>a \ngeq b</kbd> &rArr; $a \ngeq b$</p>
+            <p><kbd>a \rArr b</kbd> &rArr; $a \rArr b$</p>
+            <p><kbd>a \lArr b</kbd> &rArr; $a \lArr b$</p>
+            <p><kbd>a \rarr b</kbd> &rArr; $a \rarr b$</p>
+            <p><kbd>a \larr b</kbd> &rArr; $a \larr b$</p>
+            <p><kbd>a \Harr b</kbd> &rArr; $a \Harr b$</p>
+            <p><kbd>a \hArr b</kbd> &rArr; $a \hArr b$</p>
+            <p><kbd>a \implies b</kbd> &rArr; $a \implies b$</p>
+            <p><kbd>a \xleftarrow{text} b</kbd> &rArr; $a \xleftarrow{text} b$</p>
+            <p><kbd>a \xrightarrow{text} b</kbd> &rArr; $a \xrightarrow{text} b$</p>
+            <p><kbd>a \xLeftarrow{text} b</kbd> &rArr; $a \xLeftarrow{text} b$</p>
+            <p><kbd>a \xRightarrow{text} b</kbd> &rArr; $a \xRightarrow{text} b$</p>
+            <p><kbd>\tt AB</kbd> &rArr; $\tt AB$</p>
+            <p><kbd>\Bbb{AB}</kbd> &rArr; $\Bbb{AB}$</p>
+            <p><kbd>\frak{{AB}}</kbd> &rArr; $\frak{{AB}}$</p>
+            <p><kbd>\mathbb{AB}</kbd> &rArr; $\mathbb{AB}$</p>
+            <p><kbd>\displaystyle \sum_{i=1}^n</kbd> &rArr; $\displaystyle \sum_{i=1}^n$</p>
+            <p><kbd>\%</kbd> &rArr; $\%$</p>
+            <p><kbd>\#</kbd> &rArr; $\#$</p>
+            <p><kbd>\_</kbd> &rArr; $\_$</p>
+            <p><kbd>\text{--}</kbd> &rArr; $\text{--}$</p>
+            <p><kbd>\text{\textendash}</kbd> &rArr; $\text{\textendash}$</p>
+            <p><kbd>\text{---}</kbd> &rArr; $\text{---}$</p>
+            <p><kbd>\text{\textemdash}</kbd> &rArr; $\text{\textemdash}$</p>
+            <p><kbd>\prime</kbd> &rArr; $\prime$</p>
+            <p><kbd>\degree C</kbd> &rArr; $\degree C$</p>
+            <p><kbd>\text{\textbar}</kbd> &rArr; $\text{\textbar}$</p>
+            <p><kbd>\text{\textbardbl}</kbd> &rArr; $\text{\textbardbl}$</p>
+            <p><kbd>\text{\P}</kbd> &rArr; $\text{\P}$</p>
+            <p><kbd>\P</kbd> &rArr; $\P$</p>
+            <p><kbd>\text{\S}</kbd> &rArr; $\text{\S}$</p>
+            <p><kbd>\S</kbd> &rArr; $\S$</p>
+            <p><kbd>\dots</kbd> &rArr; $\dots$</p>
+            <p><kbd>\cdots</kbd> &rArr; $\cdots$</p>
+            <p><kbd>\ddots</kbd> &rArr; $\ddots$</p>
+            <p><kbd>\ldots</kbd> &rArr; $\ldots$</p>
+            <p><kbd>\vdots</kbd> &rArr; $\vdots$</p>
+            <p><kbd>\Box</kbd> &rArr; $\Box$</p>
+            <p><kbd>\square</kbd> &rArr; $\square$</p>
+            <p><kbd>\blacksquare</kbd> &rArr; $\blacksquare$</p>
+            <p><kbd>\triangle</kbd> &rArr; $\triangle$</p>
+            <p><kbd>\infty</kbd> &rArr; $\infty$</p>
+            <p><kbd>\checkmark</kbd> &rArr; $\checkmark$</p>
+            <p><kbd>\angle</kbd> &rArr; $\angle$</p>
+            <p><kbd>\measuredangle</kbd> &rArr; $\measuredangle$</p>
+            <p><kbd>\sphericalangle</kbd> &rArr; $\sphericalangle$</p>
+            <p><kbd>\top</kbd> &rArr; $\top$</p>
+            <p><kbd>\bot</kbd> &rArr; $\bot$</p>
+            <p><kbd>\pounds</kbd> &rArr; $\pounds$</p>
+            <p><kbd>\surd</kbd> &rArr; $\surd$</p>
+            <p><kbd>\copyright</kbd> &rArr; $\copyright$</p>
+            <p><kbd>\KaTeX</kbd> &rArr; $\KaTeX$</p>
+            <p><kbd>\LaTeX</kbd> &rArr; $\LaTeX$</p>
+            <p><kbd>\TeX</kbd> &rArr; $\TeX$</p>
+            <p><kbd>\backslash</kbd> &rArr; $\backslash$</p>
+            <p><kbd>\text{Je vidět} % \text{Není vidět}</kbd> &rArr; $\text{Je vidět} % \text{Není vidět}$</p>
+            <p><kbd>`</kbd> &rArr; $`$</p>
+            <p><kbd>a'</kbd> &rArr; $a'$</p>
+            <p><kbd>a''</kbd> &rArr; $a''$</p>
+            <p><kbd>\tilde{a}</kbd> &rArr; $\tilde{a}$</p>
+            <p><kbd>\acute{a}</kbd> &rArr; $\acute{a}$</p>
+            <p><kbd>\bar{a}</kbd> &rArr; $\bar{a}$</p>
+            <p><kbd>\dot{a}</kbd> &rArr; $\dot{a}$</p>
+            <p><kbd>\ddot{a}</kbd> &rArr; $\ddot{a}$</p>
+            <p><kbd>\vec{a}</kbd> &rArr; $\vec{a}$</p>
+            <p><kbd>\overleftarrow{a}</kbd> &rArr; $\overleftarrow{a}$</p>
+            <p><kbd>\overrightarrow{a}</kbd> &rArr; $\overrightarrow{a}$</p>
+            <p><kbd>\overline{a}</kbd> &rArr; $\overline{a}$</p>
+            <p><kbd>\underline{a}</kbd> &rArr; $\underline{a}$</p>
+            <p><kbd>\underbar{a}</kbd> &rArr; $\underbar{a}$</p>
+            <p><kbd>\mathring{a}</kbd> &rArr; $\mathring{a}$</p>
+            <p><kbd>\overlinesegment{ab}</kbd> &rArr; $\overlinesegment{ab}$</p>
+            <p><kbd>\underlinesegment{ab}</kbd> &rArr; $\underlinesegment{ab}$</p>
+            <p><kbd>\'{a}</kbd> &rArr; $\'{a}$</p>
+            <p><kbd>\`{a}</kbd> &rArr; $\`{a}$</p>
+            <p><kbd>\^{a}</kbd> &rArr; $\^{a}$</p>
+            <p><kbd>\~{a}</kbd> &rArr; $\~{a}$</p>
+            <p><kbd>\={a}</kbd> &rArr; $\={a}$</p>
+            <p><kbd>\u{a}</kbd> &rArr; $\u{a}$</p>
+            <p><kbd>\.{a}</kbd> &rArr; $\.{a}$</p>
+            <p><kbd>\"{a}</kbd> &rArr; $\"{a}$</p>
+            <p><kbd>\r{a}</kbd> &rArr; $\r{a}$</p>
+            <p><kbd>\H{a}</kbd> &rArr; $\H{a}$</p>
+            <p><kbd>\v{a}</kbd> &rArr; $\v{a}$</p>
+            <p><kbd>( )</kbd> &rArr; $( )$</p>
+            <p><kbd>[ ]</kbd> &rArr; $[ ]$</p>
+            <p><kbd>\{ \}</kbd> &rArr; $\{ \}$</p>
+            <p><kbd>\langle \rangle</kbd> &rArr; $\langle \rangle$</p>
+            <p><kbd>\lang \rang</kbd> &rArr; $\lang \rang$</p>
+            <p><kbd>\vert</kbd> &rArr; $\vert$</p>
+            <p><kbd>\Vert</kbd> &rArr; $\Vert$</p>
+            <p><kbd>|</kbd> &rArr; $|$</p>
+            <p><kbd>\llbracket \rrbracket</kbd> &rArr; $\llbracket \rrbracket$</p>
+            <p><kbd>\lceil \rceil</kbd> &rArr; $\lceil \rceil$</p>
+            <p><kbd>\ulcorner \urcorner</kbd> &rArr; $\ulcorner \urcorner$</p>
+            <p><kbd>\llcorner \lrcorner</kbd> &rArr; $\llcorner \lrcorner$</p>
+            <p><kbd>\lBrace \rBrace</kbd> &rArr; $\lBrace \rBrace$</p>
+            <p><kbd>\LARGE a</kbd> &rArr; $\LARGE a$</p>
+            <p><kbd>\Alpha</kbd> &rArr; $\Alpha$</p>
+            <p><kbd>\alpha</kbd> &rArr; $\alpha$</p>
+            <p><kbd>\Beta</kbd> &rArr; $\Beta$</p>
+            <p><kbd>\beta</kbd> &rArr; $\beta$</p>
+            <p><kbd>\Gamma</kbd> &rArr; $\Gamma$</p>
+            <p><kbd>\gamma</kbd> &rArr; $\gamma$</p>
+            <p><kbd>\Delta</kbd> &rArr; $\Delta$</p>
+            <p><kbd>\delta</kbd> &rArr; $\delta$</p>
+            <p><kbd>\Epsilon</kbd> &rArr; $\Epsilon$</p>
+            <p><kbd>\epsilon</kbd> &rArr; $\epsilon$</p>
+            <p><kbd>\Zeta</kbd> &rArr; $\Zeta$</p>
+            <p><kbd>\zeta</kbd> &rArr; $\zeta$</p>
+            <p><kbd>\Eta</kbd> &rArr; $\Eta$</p>
+            <p><kbd>\eta</kbd> &rArr; $\eta$</p>
+            <p><kbd>\Theta</kbd> &rArr; $\Theta$</p>
+            <p><kbd>\theta</kbd> &rArr; $\theta$</p>
+            <p><kbd>\Iota</kbd> &rArr; $\Iota$</p>
+            <p><kbd>\iota</kbd> &rArr; $\iota$</p>
+            <p><kbd>\Kappa</kbd> &rArr; $\Kappa$</p>
+            <p><kbd>\kappa</kbd> &rArr; $\kappa$</p>
+            <p><kbd>\Lambda</kbd> &rArr; $\Lambda$</p>
+            <p><kbd>\lambda</kbd> &rArr; $\lambda$</p>
+            <p><kbd>\Mu</kbd> &rArr; $\Mu$</p>
+            <p><kbd>\mu</kbd> &rArr; $\mu$</p>
+            <p><kbd>\Nu</kbd> &rArr; $\Nu$</p>
+            <p><kbd>\nu</kbd> &rArr; $\nu$</p>
+            <p><kbd>\Xi</kbd> &rArr; $\Xi$</p>
+            <p><kbd>\xi</kbd> &rArr; $\xi$</p>
+            <p><kbd>\Omicron</kbd> &rArr; $\Omicron$</p>
+            <p><kbd>\omicron</kbd> &rArr; $\omicron$</p>
+            <p><kbd>\Pi</kbd> &rArr; $\Pi$</p>
+            <p><kbd>\pi</kbd> &rArr; $\pi$</p>
+            <p><kbd>\Rho</kbd> &rArr; $\Rho$</p>
+            <p><kbd>\rho</kbd> &rArr; $\rho$</p>
+            <p><kbd>\Sigma</kbd> &rArr; $\Sigma$</p>
+            <p><kbd>\sigma</kbd> &rArr; $\sigma$</p>
+            <p><kbd>\Tau</kbd> &rArr; $\Tau$</p>
+            <p><kbd>\tau</kbd> &rArr; $\tau$</p>
+            <p><kbd>\Upsilon</kbd> &rArr; $\Upsilon$</p>
+            <p><kbd>\upsilon</kbd> &rArr; $\upsilon$</p>
+            <p><kbd>\Phi</kbd> &rArr; $\Phi$</p>
+            <p><kbd>\phi</kbd> &rArr; $\phi$</p>
+            <p><kbd>\Chi</kbd> &rArr; $\Chi$</p>
+            <p><kbd>\chi</kbd> &rArr; $\chi$</p>
+            <p><kbd>\Psi</kbd> &rArr; $\Psi$</p>
+            <p><kbd>\psi</kbd> &rArr; $\psi$</p>
+            <p><kbd>\Omega</kbd> &rArr; $\Omega$</p>
+            <p><kbd>\omega</kbd> &rArr; $\omega$</p>
+            <p><kbd>\cnums</kbd> &rArr; $\cnums$</p>
+            <p><kbd>\Complex</kbd> &rArr; $\Complex$</p>
+            <p><kbd>\N</kbd> &rArr; $\N$</p>
+            <p><kbd>\natnums</kbd> &rArr; $\natnums$</p>
+            <p><kbd>\R</kbd> &rArr; $\R$</p>
+            <p><kbd>\Reals</kbd> &rArr; $\Reals$</p>
+            <p><kbd>\reals</kbd> &rArr; $\reals$</p>
+            <p><kbd>\bold{text}</kbd> &rArr; $\bold{text}$</p>
+            <p><kbd>\it{text}</kbd> &rArr; $\it{text}$</p>
+            <p><kbd>\mathbb{A}</kbd> &rArr; $\mathbb{A}$</p>
+            <p><kbd>\color{blue}{A}</kbd> &rArr; $\color{blue}{A}$</p>
+            <p><kbd>a \newline a</kbd> &rArr; $a \newline a$</p>
+            <p><kbd>\</kbd> &rArr; $\$</p>
+        </section>
+-->
 
 <!-------------------  Footer  -------------------->
         <footer>

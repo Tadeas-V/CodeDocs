@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Python – průvodce pro začátečníky</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script>
+    /* Nastaví motiv před vykreslením (bez bliknutí): uložená volba, jinak systémová */
+    (function () {
+        var t = null;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+        })();
+    </script>
+
+    <link rel="stylesheet" href="../../styles/pages/py.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <p class="site-name">Python</p>
+        <p class="site-sub">Průvodce pro začátečníky</p>
+        <nav class="toc" id="toc" aria-label="Obsah"></nav>
+        <button class="theme-toggle" id="theme-toggle" type="button">
+            <span id="theme-label">Tmavý režim</span><span class="swatch" aria-hidden="true"></span>
+        </button>
+    </aside>
+
+    <div class="main">
+        <div class="topbar">
+            <button type="button" id="menu-btn" aria-controls="sidebar">Menu</button>
+            <span>Python</span>
+        </div>
+        <div class="stripe"></div>
+
+        <main class="content">
+            <header class="hero">
+                <h1>Python</h1>
+                <p>Jednoduchý jazyk, který se čte skoro jako běžná angličtina. Tady si projdeš základy krok za krokem.</p>
+            </header>
+
+            <!-- Nová sekce = nový <section id="..."> s <h2>. Menu se vytvoří samo. -->
+
+            <section id="uvod">
+                <h2>Úvod</h2>
+                <p>Python se hodí na skripty, weby, analýzu dat i automatizaci. Kód se zapisuje bez složených závorek a bloky se určují odsazením.</p>
+                <figure class="code">
+                    <figcaption><span>ahoj.py</span><button class="copy" type="button">Kopírovat</button></figcaption>
+    <pre><code class="language-python"># první program
+    print("Ahoj, světe!")</code></pre>
+                </figure>
+                <div class="note">
+                    <p><strong>Tip:</strong> Spuštění v terminálu: <code>python ahoj.py</code>. Na některých systémech se příkaz jmenuje <code>python3</code>.</p>
+                </div>
+            </section>
+
+            <section id="promenne">
+                <h2>Proměnné a typy</h2>
+                <p>Proměnná vzniká přiřazením. Typ určuje Python sám podle hodnoty.</p>
+                <figure class="code">
+                    <figcaption><span>promenne.py</span><button class="copy" type="button">Kopírovat</button></figcaption>
+    <pre><code class="language-python">jmeno = "Ada"
+    vek = 36
+    vyska = 1.68
+    je_programator = True
+
+    print(f"{jmeno} ({vek}) – programátor: {je_programator}")
+    print(type(vyska))    # &lt;class 'float'&gt;</code></pre>
+                </figure>
+                <ul>
+                    <li><code>str</code> – text</li>
+                    <li><code>int</code>, <code>float</code> – čísla</li>
+                    <li><code>bool</code> – <code>True</code> nebo <code>False</code></li>
+                </ul>
+            </section>
+
+            <section id="podminky">
+                <h2>Podmínky</h2>
+                <p>Větvení programu zajišťují <code>if</code>, <code>elif</code> a <code>else</code>. Za podmínkou následuje dvojtečka a odsazený blok.</p>
+                <figure class="code">
+                    <figcaption><span>podminky.py</span><button class="copy" type="button">Kopírovat</button></figcaption>
+    <pre><code class="language-python">teplota = 18
+
+    if teplota &gt; 25:
+            print("Vedro")
+    elif teplota &gt;= 15:
+            print("Příjemně")
+    else:
+            print("Vezmi si bundu")</code></pre>
+                </figure>
+            </section>
+        </main>
+    </div>
+    
+    <!-- PrismJS (autoloader si sám dotáhne jazyky podle class="language-xxx") -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+    </script>
+
+    <script>
+        (function () {
+            var root = document.documentElement;
+        
+            /* --- přepínač motivu --- */
+            var label = document.getElementById('theme-label');
+            function syncLabel() { label.textContent = root.dataset.theme === 'dark' ? 'Světlý režim' : 'Tmavý režim'; }
+            syncLabel();
+            document.getElementById('theme-toggle').addEventListener('click', function () {
+                var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+                root.dataset.theme = next;
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                syncLabel();
+            });
+        
+            /* --- menu se staví z <section id> + <h2> --- */
+            var toc = document.getElementById('toc');
+            var sections = document.querySelectorAll('.content section[id]');
+            sections.forEach(function (s) {
+                var a = document.createElement('a');
+                a.href = '#' + s.id;
+                a.textContent = s.querySelector('h2').textContent;
+                toc.appendChild(a);
+            });
+        
+            /* --- zvýraznění aktuální sekce --- */
+            var links = toc.querySelectorAll('a');
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    links.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id); });
+                });
+            }, { rootMargin: '-15% 0px -75% 0px' });
+            sections.forEach(function (s) { io.observe(s); });
+        
+            /* --- kopírování kódu --- */
+            document.querySelectorAll('.copy').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var code = btn.closest('.code').querySelector('code').textContent;
+                    navigator.clipboard.writeText(code).then(function () {
+                        btn.textContent = 'Zkopírováno';
+                        btn.classList.add('done');
+                        setTimeout(function () { btn.textContent = 'Kopírovat'; btn.classList.remove('done'); }, 1600);
+                    });
+                });
+            });
+        
+            /* --- mobilní menu --- */
+            var body = document.body;
+            document.getElementById('menu-btn').addEventListener('click', function () { body.classList.toggle('menu-open'); });
+            toc.addEventListener('click', function () { body.classList.remove('menu-open'); });
+        })();
+    </script>
+</body>
+</html>

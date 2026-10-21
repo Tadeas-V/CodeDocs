@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* =====================================================================
+1) TÉMA – tady měníš barvy pro každou stránku (Python, HTML, Bash…)
+Vše ostatní (pozadí, okraje, text, zvýraznění kódu) se dopočítá.
+===================================================================== */
+:root {
+    /* hlavní barva (odkazy, nadpisy, kód)      */
+    --brand:  #475569;
+    /* doplňková barva (aktivní položka, čísla) */
+    --accent: #cbd5e1;
+    /* třetí barva pro kód                      */
+    --accent-2:         color-mix(in oklab, var(--brand) 45%, var(--accent));
+
+    /* text na ploše v hlavní barvě (světlá brand → dej tmavou) */
+    --on-brand:         #ffffff;
+    /* text na ploše v doplňkové barvě */
+    --on-accent:        #1b1b1b;
+
+    --fucus-visible:    #00ffff; /* aqua */
+
+    --footer:           color-mix(in oklab, var(--fucus-visible) 25%, var(--brand));
+}
+
+/* =====================================================================
+2) Odvozené hodnoty – běžně se nemění
+===================================================================== */
+:root {
+    --font-head:        "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body:        "Instrument Sans", system-ui, sans-serif;
+    --font-mono:        "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    --sidebar-w:        17.5rem;
+    --radius:           .5rem;
+
+    /* kód je v obou režimech tmavý, aby byl vizuální kotvou stránky */
+    --code-bg:          color-mix(in oklab, var(--brand) 18%, #0d1017);
+    --code-bar:         color-mix(in oklab, var(--brand) 26%, #0d1017);
+    --code-text:        #e8ecf3;
+    --code-dim:         color-mix(in oklab, var(--code-text) 45%, var(--code-bg));
+    --tok-keyword:      color-mix(in oklab, var(--brand) 55%, #fff);
+    --tok-string:       var(--accent);
+    --tok-function:     color-mix(in oklab, var(--accent-2) 70%, #fff);
+    --tok-number:       color-mix(in oklab, var(--accent) 60%, #fff);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+    --bg:               color-mix(in oklab, var(--brand) 3%, #fff);
+    --surface:          color-mix(in oklab, var(--brand) 8%, #fff);
+    --line:             color-mix(in oklab, var(--brand) 20%, #fff);
+    --text:             color-mix(in oklab, var(--brand) 14%, #14161b);
+    --muted:            color-mix(in oklab, var(--brand) 22%, #5d626b);
+    --brand-ink:        color-mix(in oklab, var(--brand) 82%, #000);
+    --accent-ink:       color-mix(in oklab, var(--accent) 50%, #000);
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg:               color-mix(in oklab, var(--brand) 7%, #0b0d12);
+    --surface:          color-mix(in oklab, var(--brand) 12%, #0b0d12);
+    --line:             color-mix(in oklab, var(--brand) 25%, #0b0d12);
+    --text:             color-mix(in oklab, var(--brand) 8%, #eef0f4);
+    --muted:            color-mix(in oklab, var(--brand) 20%, #9a9fa8);
+    --brand-ink:        color-mix(in oklab, var(--brand) 60%, #fff);
+    --accent-ink:       var(--accent);
+}
+
+/* ---------- základ ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+}
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 1.0625rem/1.7 var(--font-body);
+}
+a {
+    color: var(--brand-ink);
+    text-underline-offset: .2em;
+    text-decoration-thickness: 1px;
+}
+:focus-visible {
+    outline: 3px solid var(--fucus-visible);
+    outline-offset: 2px;
+}
+
+/* ---------- postranní menu ---------- */
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--sidebar-w);
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border-right: 1px solid var(--line);
+    padding: 1.75rem 1.25rem 1.25rem;
+    overflow-y: auto;
+    z-index: 20;
+}
+.site-name {
+    font: 700 1.6rem/1.1 var(--font-head);
+    margin: 0;
+    color: var(--brand-ink);
+}
+.site-sub {
+    margin: .35rem 0 1.75rem;
+    font-size: .9rem;
+    color: var(--muted);
+}
+
+.toc {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+    flex: 1;
+}
+.toc a {
+    display: block;
+    padding: .45rem .75rem;
+    border-left: 3px solid transparent;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--text);
+    text-decoration: none;
+    font-size: .975rem;
+}
+.toc a:hover {
+    background: var(--bg);
+}
+.toc a.active {
+    background: var(--bg);
+    border-left-color: var(--accent);
+    color: var(--brand-ink);
+    font-weight: 600;
+}
+
+.theme-toggle {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: .55rem .8rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font: 500 .9rem var(--font-body);
+    cursor: pointer;
+}
+.theme-toggle:hover {
+    border-color: var(--brand);
+}
+.theme-toggle .swatch {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--brand) 50%, var(--accent) 50%);
+}
+
+/* ---------- obsah ---------- */
+.main {
+    margin-left: var(--sidebar-w);
+}
+.content {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 6rem;
+}
+
+.hero h1 {
+    font: 700 clamp(2.6rem, 6vw, 4rem)/1.05 var(--font-head);
+    letter-spacing: -.02em;
+    margin: 0 0 1rem;
+    color: var(--brand-ink);
+}
+.hero p {
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin: 0;
+    max-width: 36rem;
+}
+
+section {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line);
+}
+section h2 {
+    font: 700 1.9rem/1.2 var(--font-head);
+    margin: 0 0 1rem;
+    letter-spacing: -.01em;
+}
+section h3 {
+    font: 600 1.25rem/1.3 var(--font-head);
+    margin: 2rem 0 .5rem;
+}
+p {
+    text-align: justify;
+    margin: 0 0 1.1rem;
+}
+ul,
+ol {
+    padding-left: 1.4rem;
+    margin: 0 0 1.1rem;
+}
+li {
+    margin-bottom: .3rem;
+}
+li::marker {
+    color: var(--accent-ink);
+}
+
+:not(pre) > code {
+    font: 500 .88em var(--font-mono);
+    background: var(--surface);
+    color: var(--brand-ink);
+    border: 1px solid var(--line);
+    border-radius: .3rem;
+    padding: .1em .4em;
+}
+
+/* ---------- poznámka ---------- */
+.note {
+    margin: 1.5rem 0;
+    padding: .9rem 1.1rem;
+    background: var(--surface);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+.note p:last-child {
+    margin-bottom: 0;
+}
+.note strong {
+    color: var(--accent-ink);
+}
+
+/* ---------- kódové ukázky ---------- */
+.code {
+    margin: 1.5rem 0;
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.code figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .4rem .5rem .4rem 1rem;
+    background: var(--code-bar);
+    color: var(--code-dim);
+    font: 500 .8rem var(--font-mono);
+}
+.copy {
+    background: transparent;
+    color: var(--code-text);
+    border: 1px solid transparent;
+    border-radius: .3rem;
+    padding: .25rem .6rem;
+    font: 500 .8rem var(--font-body);
+    cursor: pointer;
+}
+.copy:hover {
+    border-color: var(--accent);
+}
+.copy.done {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+pre[class*="language-"] {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    background: none;
+}
+code[class*="language-"] {
+    font: 400 .9rem/1.65 var(--font-mono);
+    color: var(--code-text);
+    background: none;
+    text-shadow: none;
+    tab-size: 4;
+}
+div.code-toolbar > .toolbar {
+    display: none !important;
+}
+.token.comment,
+.token.prolog,
+.token.docstring {
+    color: var(--code-dim);
+    font-style: italic;
+}
+.token.keyword,
+.token.boolean,
+.token.constant {
+    color: var(--tok-keyword);
+}
+.token.string,
+.token.char,
+.token.f-string,
+.token.triple-quoted-string {
+    color: var(--tok-string);
+}
+.token.function,
+.token.class-name,
+.token.decorator {
+    color: var(--tok-function);
+}
+.token.number {
+    color: var(--tok-number);
+    }
+.token.builtin {
+    color: var(--tok-function);
+}
+.token.operator,
+.token.punctuation {
+    color: var(--code-text);
+    opacity: .8;
+}
+
+.topbar {
+/* ---------- mobil ---------- */
+    display: none;
+}
+
+footer {
+    margin-top: auto; 
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-top: 1px solid var(--brand);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-head);
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+footer p span.person {
+    color: var(--footer);
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform .2s;
+        box-shadow: none;
+    }
+    body.menu-open .sidebar {
+        transform: none;
+        box-shadow: 0 0 0 100vmax rgb(0 0 0 / .45);
+    }
+    .main {
+        margin-left: 0;
+    }
+    .topbar {
+    display: flex;
+        align-items: center;
+        gap: .75rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: .6rem 1rem;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        font: 700 1.1rem var(--font-head);
+        color: var(--brand-ink);
+    }
+    .topbar button {
+        background: var(--bg);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: .3rem .7rem;
+        font: 500 .9rem var(--font-body);
+        cursor: pointer;
+    }
+    .content {
+        padding-top: 2.5rem;
+        }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .sidebar {
+        transition: none;
+    }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stránka ve výstavbě</title>
+
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+
+    <link rel="stylesheet" href="../../styles/page-not-found.css">
+</head>
+
+<body>
+    <main class="box">
+        <div class="tape" aria-hidden="true"></div>
+        <h1>Omlouvám se, ale tato stránka je ještě ve výstavbě.</h1>
+        <a class="back" href="../../cards.html">Zpět</a>
+  </main>
+</body>
+</html>

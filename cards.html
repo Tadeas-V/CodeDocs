@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CodeCards</title>
+    
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+    
+    <link rel="stylesheet" href="./styles/cards.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="head">
+            <div>
+                <h1>CodeCards</h1>
+                <p>Poznámky a ukázky ke každému jazyku na jednom místě. Vyber si kartu nebo začni psát do hledání.</p>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" type="button">
+                <span id="theme-label">Tmavý režim</span><span class="swatch" aria-hidden="true"></span>
+            </button>
+        </header>
+        
+        <input class="search" id="search" type="search" placeholder="Hledat jazyk…" aria-label="Hledat jazyk" autocomplete="off">
+
+        <section class="group">
+            <h2>Pomocné (návodové) stránky</h2>
+
+            <div class="grid">
+                <a class="card prism-help" href="./pages/prism-help.html">
+                    <span class="ext">sub-page</span>
+                    <span class="status active"></span>
+                    <strong>PrismHelp</strong>
+                    <span class="desc">Description</span>
+                </a>
+
+                <a class="card style-preview" href="./pages/style-preview.html">
+                    <span class="ext">sub-page</span>
+                    <span class="status active"></span>
+                    <strong>StylePreview</strong>
+                    <span class="desc">Description</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="group">
+            <h2>Webové technologie</h2>
+
+            <div class="grid">
+                <a href="pages/in-progress/index.html" class="card lang-html">
+                    <span class="ext">.html</span>
+                    <span class="status progress"></span>
+                    <strong>HTML</strong>
+                    <span class="desc">Struktura webových stránek</span>
+                </a>
+
+                <a href="pages/in-progress/index.html" class="card lang-css">
+                    <span class="ext">.css</span>
+                    <span class="status progress"></span>
+                    <strong>CSS</strong>
+                    <span class="desc">Vzhled a rozložení</span>
+                </a>
+
+                <a href="pages/in-progress/index.html" class="card lang-js">
+                    <span class="ext">.js</span>
+                    <span class="status progress"></span>
+                    <strong>JavaScript</strong>
+                    <span class="desc">Skripty ve webovém prohlížeči</span>
+                </a>
+
+                <a href="pages/in-progress/index.html" class="card lang-php">
+                    <span class="ext">.php</span>
+                    <span class="status progress"></span>
+                    <strong>PHP</strong>
+                    <span class="desc">Serverové skripty a weby</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="group">
+            <h2>Programovací jazyky</h2>
+
+            <div class="grid">
+                <a href="pages/in-progress/index.html" class="card lang-py">
+                    <span class="ext">.py</span>
+                    <span class="status progress"></span>
+                    <strong>Python</strong>
+                    <span class="desc">Univerzální a čitelný jazyk</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-c">
+                    <span class="ext">.c</span>
+                    <span class="status progress"></span>
+                    <strong>C</strong>
+                    <span class="desc">Základ systémového programování</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-cpp">
+                    <span class="ext">.cpp</span>
+                    <span class="status progress"></span>
+                    <strong>C++</strong>
+                    <span class="desc">Objekty, šablony, STL</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-cs">
+                    <span class="ext">.cs</span>
+                    <span class="status progress"></span>
+                    <strong>C#</strong>
+                    <span class="desc">.NET a objektové programování</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="group">
+            <h2>Skriptovací jazyky</h2>
+
+            <div class="grid">
+                <a href="pages/in-progress/index.html" class="card lang-sh">
+                    <span class="ext">.sh</span>
+                    <span class="status progress"></span>
+                    <strong>Bash</strong>
+                    <span class="desc">Příkazový řádek v Linuxu</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-ps1">
+                    <span class="ext">.ps1</span>
+                    <span class="status progress"></span>
+                    <strong>PowerShell</strong>
+                    <span class="desc">Skriptování ve Windows</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-bat">
+                    <span class="ext">.bat</span>
+                    <span class="status progress"></span>
+                    <strong>Batch / CMD</strong>
+                    <span class="desc">Dávkové soubory</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-ahk">
+                    <span class="ext">.ahk</span>
+                    <span class="status progress"></span>
+                    <strong>AutoHotkey</strong>
+                    <span class="desc">Klávesové zkratky a automatizace</span>
+                </a>
+                
+            </div>
+        </section>
+
+        <section class="group">
+            <h2>Data & Databáze</h2>
+
+            <div class="grid">
+                <a href="pages/in-progress/index.html" class="card lang-json">
+                    <span class="ext">.json</span>
+                    <span class="status progress"></span>
+                    <strong>JSON</strong>
+                    <span class="desc">Výměnný formát dat</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-jsonl">
+                    <span class="ext">.jsonl</span>
+                    <span class="status progress"></span>
+                    <strong>JSON Lines</strong>
+                    <span class="desc">JSON po řádcích</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-xml">
+                    <span class="ext">.xml</span>
+                    <span class="status progress"></span>
+                    <strong>XML</strong>
+                    <span class="desc">Značkovací formát</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-yaml">
+                    <span class="ext">.yaml</span>
+                    <span class="status progress"></span>
+                    <strong>YAML</strong>
+                    <span class="desc">Konfigurační soubory</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-sql">
+                    <span class="ext">.sql</span>
+                    <span class="status progress"></span>
+                    <strong>SQL / MySQL</strong>
+                    <span class="desc">Dotazy do databází</span>
+                </a>
+                
+            </div>
+        </section>
+
+        <section class="group">
+            <h2>Dokumentace</h2>
+
+            <div class="grid">
+                <a href="pages/in-progress/index.html" class="card lang-md">
+                    <span class="ext">.md</span>
+                    <span class="status progress"></span>
+                    <strong>Markdown</strong>
+                    <span class="desc">Formátovaný text jednoduše</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-tex">
+                    <span class="ext">.tex</span>
+                    <span class="status progress"></span>
+                    <strong>LaTeX</strong>
+                    <span class="desc">Diagramy z textu</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card lang-mmd">
+                    <span class="ext">.mmd</span>
+                    <span class="status progress"></span>
+                    <strong>Mermaid</strong>
+                    <span class="desc">Sazba dokumentů a vzorců</span>
+                </a>
+                
+            </div>
+        </section>
+
+        <section class="group">
+            <h2>Jiné učení</h2>
+
+            <div class="grid">
+                <a href="pages/in-progress/index.html" class="card math">
+                    <span class="ext">sub-page</span>
+                    <span class="status progress"></span>
+                    <strong>Matematika</strong>
+                    <span class="desc">Příklady, řešení, učení</span>
+                </a>
+                
+                <a href="pages/in-progress/index.html" class="card czech">
+                    <span class="ext">sub-page</span>
+                    <span class="status progress"></span>
+                    <strong>Český jazyk</strong>
+                    <span class="desc">Literatura, četba, gramatika</span>
+                </a>
+            </div>
+        </section>
+        
+        <p class="empty" id="empty" hidden>Nic nenalezeno.</p>
+    </div>
+    
+    <script>
+        (function () {
+            var root = document.documentElement;
+            
+            /* přepínač motivu */
+            var label = document.getElementById('theme-label');
+            function syncLabel() { label.textContent = root.dataset.theme === 'dark' ? 'Světlý režim' : 'Tmavý režim'; }
+            
+            syncLabel();
+            document.getElementById('theme-toggle').addEventListener('click', function () {
+                var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+                root.dataset.theme = next;
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                syncLabel();
+            });
+            
+            /* hledání: název, přípona i popis; prázdné skupiny se schovají */
+            var cards  = document.querySelectorAll('.card');
+            var groups = document.querySelectorAll('.group');
+            var empty  = document.getElementById('empty');
+            var norm = function (s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); };
+            
+            document.getElementById('search').addEventListener('input', function (e) {
+                var q = norm(e.target.value.trim());
+                cards.forEach(function (c) { c.hidden = q && norm(c.textContent).indexOf(q) === -1; });
+                var any = false;
+                groups.forEach(function (g) {
+                    var visible = g.querySelector('.card:not([hidden])') !== null;g.hidden = !visible;
+                    
+                    if (visible) any = true;
+                });
+                empty.hidden = any;
+            });
+        })();
+    </script>
+</body>
+</html>

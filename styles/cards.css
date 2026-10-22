@@ -1,0 +1,247 @@
+/* ===== TÉMA úvodní stránky (neutrální) ===== */
+:root {
+    --brand:  #475569;
+    --accent: #cbd5e1;
+}
+
+/* ===== barvy jazyků ===== */
+.prism-help { --brand:#4cd734; --accent:#dab75f; }
+.lang-ahk   { --brand:#3b8f5a; --accent:#c9e265; }
+.lang-bat   { --brand:#3c3c3c; --accent:#3aa0ff; }
+.lang-c     { --brand:#00599c; --accent:#a8b9cc; }
+.lang-cpp   { --brand:#004482; --accent:#659ad2; }
+.lang-cs    { --brand:#68217a; --accent:#a179dc; }
+.lang-css   { --brand:#2965f1; --accent:#7fd3ff; }
+.czech      { --brand:#11457e; --accent:#d7141a; --on-brand:#ffffff; }
+.lang-html  { --brand:#e34c26; --accent:#f7b955; }
+.lang-js    { --brand:#f7df1e; --accent:#9aa0a6; --on-brand:#1b1b1b; }
+.lang-json  { --brand:#5b6770; --accent:#f5a623; }
+.lang-jsonl { --brand:#2f6f78; --accent:#f5a623; }
+.math       { --brand:#4338ca; --accent:#f59e0b; }
+.lang-md    { --brand:#2b2f3a; --accent:#7aa2f7; }
+.lang-mmd   { --brand:#ff3670; --accent:#1ec8c8; }
+.lang-php   { --brand:#4f5b93; --accent:#aeb2e0; }
+.lang-ps1   { --brand:#012456; --accent:#6ec1ff; }
+.lang-py    { --brand:#3776ab; --accent:#ffd43b; }
+.lang-sh    { --brand:#1f2933; --accent:#4eaa25; }
+.lang-sql   { --brand:#00758f; --accent:#f29111; }
+.lang-tex   { --brand:#008080; --accent:#d9a441; }
+.lang-xml   { --brand:#8a5a2b; --accent:#7fc8a9; }
+.lang-yaml  { --brand:#cb171e; --accent:#f2c14e; }
+
+/* ===== odvozené hodnoty ===== */
+:root {
+    --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Instrument Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    --radius: .5rem;
+}
+:root[data-theme="light"] {
+    color-scheme: light;
+    --bg:        color-mix(in oklab, var(--brand) 3%, #fff);
+    --surface:   color-mix(in oklab, var(--brand) 8%, #fff);
+    --line:      color-mix(in oklab, var(--brand) 20%, #fff);
+    --text:      color-mix(in oklab, var(--brand) 14%, #14161b);
+    --muted:     color-mix(in oklab, var(--brand) 22%, #5d626b);
+    --brand-ink: color-mix(in oklab, var(--brand) 82%, #000);
+}
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg:        color-mix(in oklab, var(--brand) 7%, #0b0d12);
+    --surface:   color-mix(in oklab, var(--brand) 12%, #0b0d12);
+    --line:      color-mix(in oklab, var(--brand) 25%, #0b0d12);
+    --text:      color-mix(in oklab, var(--brand) 8%, #eef0f4);
+    --muted:     color-mix(in oklab, var(--brand) 20%, #9a9fa8);
+    --brand-ink: color-mix(in oklab, var(--brand) 60%, #fff);
+}
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 1.0625rem/1.6 var(--font-body);
+}
+:focus-visible {
+    outline: 3px solid var(--brand-ink);
+    outline-offset: 2px;
+}
+
+
+.wrap {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}
+
+
+.head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.head h1 {
+    font: 700 clamp(2.6rem, 6vw, 4rem)/1.05 var(--font-head);
+    letter-spacing: -.02em;
+    margin: 0 0 .75rem;
+    color: var(--brand-ink);
+}
+.head p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--muted);
+    max-width: 34rem;
+}
+
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .55rem .8rem;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font: 500 .9rem var(--font-body);
+    cursor: pointer;
+}
+.theme-toggle:hover {
+    border-color: var(--brand);
+}
+.swatch {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--brand) 50%, var(--accent) 50%);
+}
+
+
+.search {
+    display: block;
+    width: 100%;
+    max-width: 26rem;
+    margin: 2rem 0 0;
+    padding: .7rem 1rem;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font: 400 1rem var(--font-body);
+}
+.search::placeholder {
+    color: var(--muted);
+}
+
+
+.group {
+    margin-top: 3rem;
+}
+.group h2 {
+    font: 700 1.4rem/1.2 var(--font-head);
+    margin: 0 0 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+}
+
+
+/* karta si přepíše --brand a --accent inline stylem (viz HTML) */
+.card {
+    position: relative;
+    display: grid;
+    gap: .2rem;
+    padding: 1rem 1.1rem 1rem 1.6rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color .15s;
+    grid-template-columns: 1fr auto;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: .6rem;
+    background: linear-gradient(180deg, var(--brand) 0 40%, var(--accent) 60% 100%);
+}
+.card:hover {
+    border-color: var(--brand);
+}
+
+.card .ext {
+    font: 500 .8rem var(--font-mono);
+    color: var(--muted);
+    grid-column: 1;
+}
+.card strong {
+    font: 700 1.3rem/1.2 var(--font-head);
+}
+.card .desc {
+    font-size: .92rem;
+    color: var(--muted);
+}
+.card strong,
+.card .desc {
+    grid-column: 1 / -1;
+}
+.card .status {
+    grid-column: 2;
+    grid-row: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font: 500 .75rem var(--font-body);
+    color: var(--muted);
+}
+.card .status::before {
+    content: "";
+    width: .55rem;
+    height: .55rem;
+    border-radius: 50%;
+}
+.card .status.active::before {
+    background: var(--ok);
+}
+.card .status.active::after {
+    color: #4cd734;
+    content: "▲ Active";
+}
+.card .status.deactive::after {
+    color: #cb171e;
+    content: "▼ Deactive";
+}
+.card .status.progress::after {
+    color: #5b6770;
+    content: "In Progress";
+}
+.card[hidden],
+.group[hidden] {
+    display: none;
+}
+.empty {
+    margin-top: 2rem;
+    color: var(--muted);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+    }
+}

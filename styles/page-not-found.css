@@ -1,0 +1,85 @@
+/* ===== TÉMA (neutrální) ===== */
+:root {
+    --brand: #d7141a;
+    --accent: #ffffff;
+    --on-brand: #ffffff;
+}
+/*
+#ff3670
+*/
+
+/* ===== odvozené hodnoty ===== */
+:root {
+    --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Instrument Sans", system-ui, sans-serif;
+    --radius: .5rem;
+}
+:root[data-theme="light"] {
+    color-scheme: light;
+    --bg: color-mix(in oklab, var(--brand) 3%, #fff);
+    --text: color-mix(in oklab, var(--brand) 14%, #14161b);
+}
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: color-mix(in oklab, var(--brand) 7%, #0b0d12);
+    --text: color-mix(in oklab, var(--brand) 8%, #eef0f4);
+}
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 1.0625rem/1.6 var(--font-body);
+}
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+
+.box {
+    width: min(32rem, 100% - 3rem);
+    text-align: center;
+}
+
+
+/* pruhy jako na staveništi – z barev tématu */
+.tape {
+    height: 1.1rem;
+    margin-bottom: 2.5rem;
+    border-radius: .25rem;
+    background: repeating-linear-gradient(-45deg, var(--brand) 0 1rem, var(--accent) 1rem 2rem);
+}
+
+
+h1 {
+    font: 700 clamp(1.6rem, 4.5vw, 2.2rem)/1.25 var(--font-head);
+    letter-spacing: -.01em;
+    margin: 0 0 2rem;
+}
+
+
+.back {
+    display: inline-block;
+    padding: .7rem 1.6rem;
+    background: var(--brand);
+    color: var(--on-brand);
+    border-radius: var(--radius);
+    font: 600 1rem var(--font-body);
+    text-decoration: none;
+}
+.back:hover {
+    filter: brightness(1.12);
+}
